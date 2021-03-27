@@ -28,6 +28,9 @@
 		1A085B8B260FB2A000DC9F03 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B8A260FB29F00DC9F03 /* HttpClient.swift */; };
 		1A085B8D260FBC0A00DC9F03 /* UIWindow+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B8C260FBC0A00DC9F03 /* UIWindow+Utils.swift */; };
 		1A085B90260FD33800DC9F03 /* ViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B8F260FD33800DC9F03 /* ViewType.swift */; };
+		1A085B92260FDED700DC9F03 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B91260FDED700DC9F03 /* ApiRouter.swift */; };
+		1A085B95260FDFBA00DC9F03 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B94260FDFBA00DC9F03 /* Product.swift */; };
+		1A085B97260FDFCC00DC9F03 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B96260FDFCC00DC9F03 /* Review.swift */; };
 		9600A79D6A1D48B250C0710F /* libPods-Adidas Challenge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD2DB39F3254EB93E7D1ECD /* libPods-Adidas Challenge.a */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +70,9 @@
 		1A085B8A260FB29F00DC9F03 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		1A085B8C260FBC0A00DC9F03 /* UIWindow+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Utils.swift"; sourceTree = "<group>"; };
 		1A085B8F260FD33800DC9F03 /* ViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewType.swift; sourceTree = "<group>"; };
+		1A085B91260FDED700DC9F03 /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
+		1A085B94260FDFBA00DC9F03 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		1A085B96260FDFCC00DC9F03 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		36188B90ABAD9225C5A21726 /* Pods-Adidas ChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adidas ChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-Adidas ChallengeTests/Pods-Adidas ChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		6394D6C256DEACDD02B9248A /* Pods-Adidas ChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adidas ChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-Adidas ChallengeTests/Pods-Adidas ChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6FD2DB39F3254EB93E7D1ECD /* libPods-Adidas Challenge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Adidas Challenge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,10 +206,21 @@
 		1A085B7A260F0BAE00DC9F03 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				1A085B93260FDF9F00DC9F03 /* Entities */,
 				1A085B7B260F0C7400DC9F03 /* Module.swift */,
 				1A085B8A260FB29F00DC9F03 /* HttpClient.swift */,
+				1A085B91260FDED700DC9F03 /* ApiRouter.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		1A085B93260FDF9F00DC9F03 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				1A085B94260FDFBA00DC9F03 /* Product.swift */,
+				1A085B96260FDFCC00DC9F03 /* Review.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		25D84DC9030575469F085ABE /* Pods */ = {
@@ -387,7 +404,10 @@
 				1A085B79260F0B8A00DC9F03 /* ProductListModuleBuilder.swift in Sources */,
 				1A085B87260F721800DC9F03 /* ProductListUseCase.swift in Sources */,
 				1A085B8B260FB2A000DC9F03 /* HttpClient.swift in Sources */,
+				1A085B95260FDFBA00DC9F03 /* Product.swift in Sources */,
 				1A085B4D260E815D00DC9F03 /* SceneDelegate.swift in Sources */,
+				1A085B92260FDED700DC9F03 /* ApiRouter.swift in Sources */,
+				1A085B97260FDFCC00DC9F03 /* Review.swift in Sources */,
 				1A085B8D260FBC0A00DC9F03 /* UIWindow+Utils.swift in Sources */,
 				1A085B85260F717E00DC9F03 /* ProductListService.swift in Sources */,
 				1A085B77260EA0DD00DC9F03 /* DependencyManager.swift in Sources */,
