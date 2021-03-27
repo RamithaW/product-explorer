@@ -16,7 +16,11 @@ struct ProductListViewModelInputs {
 struct ProductListViewModelOutputs {
 }
 
-public class ProductListViewModel {
+public protocol ProductListViewModellable: ViewModelType {
+    
+}
+    
+public class ProductListViewModel: ProductListViewModellable {
     
     private let useCase: ProductListInteractable
     
@@ -27,5 +31,11 @@ public class ProductListViewModel {
     
     init(useCase: ProductListInteractable) {
         self.useCase = useCase
+        
+        useCase.fetchProducts().subscribe(onNext: { p in
+            print(p)
+        }, onError: { (error) in
+            print(error)
+        }).disposed(by: disposeBag)
     }
 }

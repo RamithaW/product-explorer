@@ -9,6 +9,7 @@
 import RxSwift
 
 public protocol ProductListInteractable {
+    func fetchProducts() -> Observable<[Product]>
 }
 
 class ProductListUseCase: ProductListInteractable {
@@ -17,6 +18,10 @@ class ProductListUseCase: ProductListInteractable {
     
     init(service: ProductListServiceFetching) {
         self.service = service
+    }
+    
+    func fetchProducts() -> Observable<[Product]> {
+        return service.fetchProducts()
     }
 }
 

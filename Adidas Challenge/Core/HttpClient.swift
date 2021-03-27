@@ -12,17 +12,21 @@ import RxSwift
 import Alamofire
 
 enum ApiError: Error {
-    case notFound               //Status code 404
-    case internalServerError    //Status code 500
+    case notFound
+    case internalServerError
 }
 
-class HttpClient {
+public protocol HTTPClientType {
+    func request<T: Codable> (_ urlConvertible: URLRequestConvertible) -> Observable<T>
+}
+
+public class HttpClient: HTTPClientType {
     
-    func request<T: Codable> (_ urlConvertible: URLRequestConvertible) -> Observable<T> {
+    public func request<T: Codable> (_ urlConvertible: URLRequestConvertible) -> Observable<T> {
         //Create an RxSwift observable, which will be the one to call the request when subscribed to
         return Observable<T>.create { observer in
             //Trigger the HttpRequest using AlamoFire (AF)
-            let request = AF.request(urlConvertible).responseDecodable { (response: DataResponse<T>) in
+            _ = AF.request(urlConvertible).responseDecodable { (response: DataResponse<T>) in
                 //Check the result from Alamofire's response and check if it's a success or a failure
                 switch response.result {
                 case .success(let value):
@@ -43,9 +47,7 @@ class HttpClient {
             }
             
             //Finally, we return a disposable to stop the request
-            return Disposables.create {
-                request.cancel()
-            }
+            return Disposables.create()
         }
     }
 }

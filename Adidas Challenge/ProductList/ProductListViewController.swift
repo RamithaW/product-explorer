@@ -8,10 +8,22 @@
 
 import UIKit
 
-class ProductListViewController: UIViewController {
+class ProductListViewController: UIViewController, ViewType {
+
+    var viewModel: ProductListViewModellable!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+        setupConstraints()
+        
+    }
+    
+    func setupUI() {
         view.backgroundColor = .blue
+    }
+    
+    func setupConstraints() {
+        
     }
 }

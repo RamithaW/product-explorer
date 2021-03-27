@@ -27,6 +27,7 @@
 		1A085B89260F727E00DC9F03 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B88260F727E00DC9F03 /* ProductListViewController.swift */; };
 		1A085B8B260FB2A000DC9F03 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B8A260FB29F00DC9F03 /* HttpClient.swift */; };
 		1A085B8D260FBC0A00DC9F03 /* UIWindow+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B8C260FBC0A00DC9F03 /* UIWindow+Utils.swift */; };
+		1A085B90260FD33800DC9F03 /* ViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B8F260FD33800DC9F03 /* ViewType.swift */; };
 		9600A79D6A1D48B250C0710F /* libPods-Adidas Challenge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD2DB39F3254EB93E7D1ECD /* libPods-Adidas Challenge.a */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		1A085B88260F727E00DC9F03 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 		1A085B8A260FB29F00DC9F03 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		1A085B8C260FBC0A00DC9F03 /* UIWindow+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Utils.swift"; sourceTree = "<group>"; };
+		1A085B8F260FD33800DC9F03 /* ViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewType.swift; sourceTree = "<group>"; };
 		36188B90ABAD9225C5A21726 /* Pods-Adidas ChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adidas ChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-Adidas ChallengeTests/Pods-Adidas ChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		6394D6C256DEACDD02B9248A /* Pods-Adidas ChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adidas ChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-Adidas ChallengeTests/Pods-Adidas ChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6FD2DB39F3254EB93E7D1ECD /* libPods-Adidas Challenge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Adidas Challenge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +184,7 @@
 			children = (
 				1A085B8C260FBC0A00DC9F03 /* UIWindow+Utils.swift */,
 				1A085B75260EA0D500DC9F03 /* DependencyManager */,
+				1A085B8F260FD33800DC9F03 /* ViewType.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				1A085B4B260E815D00DC9F03 /* AppDelegate.swift in Sources */,
 				1A085B72260E9C1E00DC9F03 /* AppCoordinator.swift in Sources */,
 				1A085B7C260F0C7400DC9F03 /* Module.swift in Sources */,
+				1A085B90260FD33800DC9F03 /* ViewType.swift in Sources */,
 				1A085B7E260F6DF600DC9F03 /* ProductListCoordinator.swift in Sources */,
 				1A085B79260F0B8A00DC9F03 /* ProductListModuleBuilder.swift in Sources */,
 				1A085B87260F721800DC9F03 /* ProductListUseCase.swift in Sources */,
