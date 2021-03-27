@@ -9,6 +9,7 @@
 import Foundation
 
 public class DependencyManager {
+    
     fileprivate var factories = [String: Any]()
     
     public static let shared: DependencyManager = DependencyManager()

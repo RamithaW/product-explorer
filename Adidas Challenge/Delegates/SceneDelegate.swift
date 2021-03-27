@@ -17,15 +17,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        if let windowScene = scene as? UIWindowScene {
-            let window = UIWindow(windowScene: windowScene)
-            self.window = window
-            window.makeKeyAndVisible()
-            appCoordinator = AppCoordinator(window: window)
-            appCoordinator.start()
-                .subscribe()
-                .disposed(by: disposeBag)
-        }
+        guard let windowScene = scene as? UIWindowScene else { return }
+        
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        window.makeKeyAndVisible()
+        appCoordinator = AppCoordinator(window: window)
+        appCoordinator.start()
+            .subscribe()
+            .disposed(by: disposeBag)
     }
     
 }
