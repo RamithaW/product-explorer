@@ -8,7 +8,12 @@
 
 import RxSwift
 
+public struct Product {
+    var name = "Levis Jeans"
+}
+
 public protocol ProductListServiceFetching {
+    func fetchProducts() -> Observable<[Product]>
 }
 
 class ProductListService: ProductListServiceFetching {
@@ -19,5 +24,15 @@ class ProductListService: ProductListServiceFetching {
     public init(client: NSObject, serviceErrorListener: NSObject) {
         self.client = client
         self.serviceErrorListener = serviceErrorListener
+    }
+    
+    func fetchProducts() -> Observable<[Product]> {
+        return Observable.create { observer in
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                observer.onNext([Product(), Product()])
+            }
+            return Disposables.create()
+        }
     }
 }
