@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import RxSwift
 
-public protocol ViewModelType: class {}
+public protocol ViewModelType: class {
+    var disposeBag: DisposeBag { get }
+}
 
 public protocol ViewType {
     associatedtype GenericViewModel

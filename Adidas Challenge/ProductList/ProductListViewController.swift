@@ -16,7 +16,9 @@ class ProductListViewController: UIViewController, ViewType {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        setupObservers()
         
+        viewModel.inputs.viewDidLoad.onNext(())
     }
     
     func setupUI() {
@@ -25,5 +27,18 @@ class ProductListViewController: UIViewController, ViewType {
     
     func setupConstraints() {
         
+    }
+    
+    func setupObservers() {
+        observeViewReloading()
+    }
+}
+
+private extension ProductListViewController {
+     
+    func observeViewReloading() {
+        viewModel.outputs.reloadView.subscribe(onNext: { [weak self] _ in
+            self?.view.backgroundColor = .red
+        }).disposed(by: viewModel.disposeBag)
     }
 }
