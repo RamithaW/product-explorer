@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 public struct ProductListViewModelInputs {
-    let viewDidLoad = PublishSubject<Void>()
+    let loadData = PublishSubject<Void>()
 }
 
 public struct ProductListViewModelOutputs {
@@ -41,14 +41,14 @@ public class ProductListViewModel: ProductListViewModellable {
     }
     
     func setupObservers() {
-        inputs.viewDidLoad.subscribe(onNext: { [weak self] _ in
+        inputs.loadData.subscribe(onNext: { [weak self] _ in
             guard let self = self else { return }
             
             self.useCase.fetchProducts().subscribe(onNext: { p in
                 self.products = p
                 self.outputs.reloadView.onNext(())
             }, onError: { (error) in
-                print(error)
+                print("Error while fetching data from the backend")
             }).disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
     }

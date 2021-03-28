@@ -9,16 +9,21 @@
 import UIKit
 
 class ProductListViewController: UIViewController, ViewType {
-
+    
     var viewModel: ProductListViewModellable!
+    
+    lazy var refreshControl: UIRefreshControl = {
+        var refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        return refreshControl
+    }()
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        
         tableView.showsVerticalScrollIndicator = false
-        tableView.scrollsToTop = false
+        tableView.addSubview(refreshControl)
         
         return tableView
     }()
@@ -31,12 +36,11 @@ class ProductListViewController: UIViewController, ViewType {
         
         tableView.delegate = self
         tableView.dataSource = self
-        viewModel.inputs.viewDidLoad.onNext(())
+        viewModel.inputs.loadData.onNext(())
     }
     
     func setupUI() {
-        view.backgroundColor = .blue
-        
+        view.backgroundColor = .white
         view.addSubview(tableView)
     }
     
@@ -54,13 +58,20 @@ class ProductListViewController: UIViewController, ViewType {
     func setupObservers() {
         observeViewReloading()
     }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        guard let refreshControl = sender as? UIRefreshControl else { return }
+        
+        refreshControl.endRefreshing()
+        viewModel.inputs.loadData.onNext(())
+    }
 }
 
 private extension ProductListViewController {
-     
+    
     func observeViewReloading() {
         viewModel.outputs.reloadView.subscribe(onNext: { [weak self] _ in
-            self?.view.backgroundColor = .red
+            self?.refreshControl.endRefreshing()
             self?.tableView.reloadData()
         }).disposed(by: viewModel.disposeBag)
     }
@@ -77,7 +88,8 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? UITableViewCell {
             
             let data = viewModel.item(at: indexPath.row)
-            cell.textLabel?.text = data.name
+            cell.textLabel?.text = "\(data.name) \(data.id)"
+            cell.backgroundColor = .white
             return cell
         }
         

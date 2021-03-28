@@ -175,6 +175,7 @@
 		1A085B73260EA01800DC9F03 /* ProductList */ = {
 			isa = PBXGroup;
 			children = (
+				1A085B982610666000DC9F03 /* View */,
 				1A085B78260F0B8A00DC9F03 /* ProductListModuleBuilder.swift */,
 				1A085B7D260F6DF600DC9F03 /* ProductListCoordinator.swift */,
 				1A085B82260F707100DC9F03 /* ProductListViewModel.swift */,
@@ -221,6 +222,13 @@
 				1A085B96260FDFCC00DC9F03 /* Review.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		1A085B982610666000DC9F03 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		25D84DC9030575469F085ABE /* Pods */ = {
