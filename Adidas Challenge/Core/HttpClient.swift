@@ -46,7 +46,6 @@ public class HttpClient: HTTPClientType {
                 }
             }
             
-            //Finally, we return a disposable to stop the request
             return Disposables.create()
         }
     }
