@@ -21,15 +21,18 @@ public struct ProductListViewModelOutputs {
 public protocol ProductListViewModellable: ViewModelType {
     var inputs: ProductListViewModelInputs { get }
     var outputs: ProductListViewModelOutputs { get }
+    
+    func numberOfRowsInSection() -> Int
+    func item(at index: Int) -> Product
 }
 
 public class ProductListViewModel: ProductListViewModellable {
     
     private let useCase: ProductListInteractable
+    private var products = [Product]()
     
     public let inputs = ProductListViewModelInputs()
     public let outputs = ProductListViewModelOutputs()
-    
     public let disposeBag: DisposeBag = DisposeBag()
     
     init(useCase: ProductListInteractable) {
@@ -42,10 +45,19 @@ public class ProductListViewModel: ProductListViewModellable {
             guard let self = self else { return }
             
             self.useCase.fetchProducts().subscribe(onNext: { p in
+                self.products = p
                 self.outputs.reloadView.onNext(())
             }, onError: { (error) in
                 print(error)
             }).disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
+    }
+    
+    public func numberOfRowsInSection() -> Int {
+        return products.count
+    }
+    
+    public func item(at index: Int) -> Product {
+        return products[index]
     }
 }
