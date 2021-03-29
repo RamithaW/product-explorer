@@ -74,12 +74,15 @@ private extension ProductDetailModuleBuilder {
     
     func registerCoordinator(rootViewController: UINavigationController? = nil) {
         container.register(ProductDetailCoordinator.self) { [weak self] in
-            guard let viewController = self?.container.resolve(ProductDetailViewController.self) else {
+            guard let self = self, let viewController = self.container.resolve(ProductDetailViewController.self) else {
                 return nil
             }
             
-            let coordinator = ProductDetailCoordinator(rootViewController: rootViewController, viewController: viewController)
+            let addReviewModuleBuilder = AddReviewModuleBuilder(container: self.container)
+            
+            let coordinator = ProductDetailCoordinator(rootViewController: rootViewController, viewController: viewController, addReviewModuleBuilder: addReviewModuleBuilder)
             coordinator.dismissedView = viewController.viewModel.outputs.viewDismissed
+            coordinator.addReview = viewController.viewModel.outputs.footerButtonTapped
             return coordinator
         }
     }

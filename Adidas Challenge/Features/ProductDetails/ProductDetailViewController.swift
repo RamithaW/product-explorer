@@ -158,9 +158,7 @@ extension ProductDetailViewController {
 
     func setupObservers() {
         observeProductDetails()
-        footer.footerButtonTapped.subscribe { _ in
-            print("Button tapped")
-        }.disposed(by: viewModel.disposeBag)
+        footer.footerButtonTapped.bind(to: viewModel.inputs.footerButtonTapped).disposed(by: viewModel.disposeBag)
     }
     
     func observeProductDetails(){

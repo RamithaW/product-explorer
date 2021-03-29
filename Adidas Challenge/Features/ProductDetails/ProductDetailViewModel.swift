@@ -14,11 +14,14 @@ protocol ProductDetailViewModellable: class {
     var outputs: ProductDetailViewModelOutputs { get }
 }
 
-struct ProductDetailViewModelInputs {}
+struct ProductDetailViewModelInputs {
+    let footerButtonTapped = PublishSubject<Void>()
+}
 
 struct ProductDetailViewModelOutputs {
     let viewDismissed = PublishSubject<Void>()
     let showProductDetails = BehaviorSubject<Product?>(value: nil)
+    let footerButtonTapped = PublishSubject<Void>()
 }
 
 class ProductDetailViewModel: ProductDetailViewModellable {
@@ -39,5 +42,7 @@ class ProductDetailViewModel: ProductDetailViewModellable {
 
 private extension ProductDetailViewModel {
 
-    func setupObservables() {}
+    func setupObservables() {
+        inputs.footerButtonTapped.bind(to: outputs.footerButtonTapped).disposed(by: disposeBag)
+    }
 }

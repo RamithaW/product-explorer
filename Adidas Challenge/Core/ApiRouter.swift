@@ -55,7 +55,7 @@ enum ApiRouter: URLRequestConvertible {
     private var path: String {
         switch self {
         case .getProducts:
-            return "http://localhost:3001/product"
+            return "http://192.168.0.136:3001/product"
         }
     }
     

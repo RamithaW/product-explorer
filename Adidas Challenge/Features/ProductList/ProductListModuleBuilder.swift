@@ -41,7 +41,7 @@ public class ProductListModuleBuilder: ProductListModuleBuildable {
     func registerService() {
         container.register(HTTPClientType.self) { HttpClient() }
         container.register(ProductListServiceFetching.self) { [weak self] in
-            guard let httpClient = self?.container.resolve(HTTPClientType.self) else { return nil}
+            guard let httpClient = self?.container.resolve(HTTPClientType.self) else { return nil }
             
             return ProductListService(client: httpClient)
         }

@@ -81,9 +81,6 @@ private extension ProductCell {
         addSubview(productPriceLabel)
         
         productImageView.backgroundColor = .white
-//        productNameLabel.backgroundColor = .blue
-//        productDescriptionLabel.backgroundColor = .yellow
-//        productPriceLabel.backgroundColor = .systemPink
     }
     
     func setupConstraints() {
