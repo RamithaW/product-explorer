@@ -21,12 +21,15 @@ class ProductListViewController: UIViewController, ViewType {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(ProductCell.self, forCellReuseIdentifier: "\(ProductCell.self)")
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.addSubview(refreshControl)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableView.automaticDimension
+        
         return tableView
     }()
     
@@ -123,15 +126,12 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? UITableViewCell {
-            
-            let data = viewModel.item(at: indexPath.row)
-            cell.textLabel?.text = "\(data.name) \(data.id)"
-            cell.backgroundColor = .white
-            return cell
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(ProductCell.self)", for: indexPath) as? ProductCell else { preconditionFailure("Could not dequeue cell for product list tableview")}
         
-        preconditionFailure("Could not dequeue cell for product list tableview")
+        let product = viewModel.item(at: indexPath.row)
+        cell.selectionStyle = .none
+        cell.setup(with: ProductCellData(name: product.name, imageURL: product.imgUrl, price: "\(ApplicationConstants.currencySymbol) \(product.price)", description: product.description))
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

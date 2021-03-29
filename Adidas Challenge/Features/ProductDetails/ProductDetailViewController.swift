@@ -179,7 +179,12 @@ extension ProductDetailViewController {
             
             guard let imageURL = URL(string: product.imgUrl) else { return }
             
-            Nuke.loadImage(with: imageURL, into: self.productImageView)
+            let options = ImageLoadingOptions(
+                placeholder: UIImage(named: "placeholder"),
+                transition: .fadeIn(duration: 0.5)
+            )
+            
+            Nuke.loadImage(with: imageURL, options: options, into: self.productImageView)
         }).disposed(by: viewModel.disposeBag)
     }
 }
