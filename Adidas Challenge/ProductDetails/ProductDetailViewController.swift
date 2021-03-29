@@ -45,11 +45,24 @@ class ProductDetailViewController: UIViewController, ViewType {
         return label
     }()
     
-    lazy var productDescriptionLabel: UILabel = {
+    lazy var productDescriptionTitleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .yellow
-        label.text = "Description here"
+        label.text = "Product Description"
         label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var productDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var productReviewTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Reviews"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -94,14 +107,12 @@ extension ProductDetailViewController {
         scrollView.addSubview(productImageView)
         scrollView.addSubview(productNameLabel)
         scrollView.addSubview(productPriceLabel)
+        scrollView.addSubview(productDescriptionTitleLabel)
         scrollView.addSubview(productDescriptionLabel)
+        scrollView.addSubview(productReviewTitleLabel)
         scrollView.addSubview(stackView)
-        scrollView.backgroundColor = .green
         view.addSubview(footer)
         
-        for _ in 1 ... 20 {
-            stackView.addArrangedSubview(ReviewView())
-        }
         scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: footer.systemLayoutSizeFitting(UIScreen.main.bounds.size).height, right: 0)
     }
 
@@ -123,11 +134,17 @@ extension ProductDetailViewController {
             productPriceLabel.topAnchor.constraint(equalTo: productNameLabel.topAnchor),
             productPriceLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             
-            productDescriptionLabel.topAnchor.constraint(equalTo: productNameLabel.bottomAnchor, constant: 10),
+            productDescriptionTitleLabel.topAnchor.constraint(equalTo: productNameLabel.bottomAnchor, constant: 25),
+            productDescriptionTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            
+            productDescriptionLabel.topAnchor.constraint(equalTo: productDescriptionTitleLabel.bottomAnchor, constant: 10),
             productDescriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             productDescriptionLabel.rightAnchor.constraint(lessThanOrEqualTo: view.rightAnchor, constant: -20),
             
-            stackView.topAnchor.constraint(equalTo: productDescriptionLabel.bottomAnchor, constant: 20),
+            productReviewTitleLabel.topAnchor.constraint(equalTo: productDescriptionLabel.bottomAnchor, constant: 25),
+            productReviewTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            
+            stackView.topAnchor.constraint(equalTo: productReviewTitleLabel.bottomAnchor, constant: 5),
             stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
@@ -139,8 +156,26 @@ extension ProductDetailViewController {
     }
 
     func setupObservers() {
+        observeProductDetails()
         footer.footerButtonTapped.subscribe { _ in
             print("Button tapped")
         }.disposed(by: viewModel.disposeBag)
+    }
+    
+    func observeProductDetails(){
+        viewModel.outputs.showProductDetails.subscribe(onNext: {[weak self] (product) in
+            guard let self = self, let product = product else { return }
+            
+            self.title = product.name
+            
+            self.productNameLabel.text = product.name
+            self.productPriceLabel.text = "\(ApplicationConstants.currencySymbol)\(product.price)"
+            self.productDescriptionLabel.text = product.description
+            
+            product.reviews.forEach { (review) in
+                self.stackView.addArrangedSubview(ReviewView(withReview: review))
+            }
+            
+        }).disposed(by: viewModel.disposeBag)
     }
 }

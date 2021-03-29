@@ -12,25 +12,24 @@ class ReviewView: UIView {
     
     lazy var reviewTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "Review text here.."
-        label.backgroundColor = .systemPink
+        label.font = label.font.withSize(13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
+    // Ideally this would be stars but adding a label for now
     lazy var ratingLabel: UILabel = {
         let label = UILabel()
-        label.text = "3 out of 5"
         label.font = label.font.withSize(10)
-        label.backgroundColor = .orange
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    init(){
+    init(withReview review: Review){
         super.init(frame: .zero)
         setupUI()
         setupConstraints()
+        populate(using: review)
     }
     
     required init?(coder: NSCoder) {
@@ -49,9 +48,14 @@ class ReviewView: UIView {
             ratingLabel.rightAnchor.constraint(equalTo: rightAnchor),
             
             reviewTextLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 2),
-            reviewTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            reviewTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
             reviewTextLabel.leftAnchor.constraint(equalTo: leftAnchor),
             reviewTextLabel.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor)
         ])
+    }
+    
+    func populate(using review: Review) {
+        reviewTextLabel.text = review.text
+        ratingLabel.text = "\(review.rating) out of \(ApplicationConstants.maxRating)"
     }
 }

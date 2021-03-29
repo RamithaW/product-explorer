@@ -20,6 +20,7 @@ public protocol ModuleBuildable: class {
     func buildModule<T>() -> Module<T>?
     func buildModule<T>(with window: UIWindow) -> Module<T>?
     func buildModule<T>(with rootViewController: UINavigationController) -> Module<T>?
+    func buildModule<T>(with rootViewController: UINavigationController, context: Any?) -> Module<T>?
 }
 
 extension ModuleBuildable {
@@ -33,6 +34,10 @@ extension ModuleBuildable {
     }
     
     public func buildModule<T>(with rootViewController: UINavigationController) -> Module<T>? {
+        return nil
+    }
+    
+    public func buildModule<T>(with rootViewController: UINavigationController, context: Any?) -> Module<T>? {
         return nil
     }
 }

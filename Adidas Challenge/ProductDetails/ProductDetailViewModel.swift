@@ -18,6 +18,7 @@ struct ProductDetailViewModelInputs {}
 
 struct ProductDetailViewModelOutputs {
     let viewDismissed = PublishSubject<Void>()
+    let showProductDetails = BehaviorSubject<Product?>(value: nil)
 }
 
 class ProductDetailViewModel: ProductDetailViewModellable {
@@ -27,8 +28,10 @@ class ProductDetailViewModel: ProductDetailViewModellable {
     let outputs = ProductDetailViewModelOutputs()
     var useCase: ProductDetailInteractable
 
-    init(useCase: ProductDetailInteractable) {
+    init(useCase: ProductDetailInteractable, product: Product) {
         self.useCase = useCase
+        outputs.showProductDetails.onNext(product)
+        setupObservables()
     }
 }
 

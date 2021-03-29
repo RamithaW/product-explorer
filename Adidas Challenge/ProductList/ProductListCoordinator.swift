@@ -30,7 +30,7 @@ class ProductListCoordinator: BaseCoordinator<Void> {
         
         showProductDetails.subscribe(onNext: { [weak self] (product) in
             
-            guard let self = self, let productDetailCoordinator = self.productDetailModuleBuilder.buildModule(with: self.navigationController)?.coordinator as? ProductDetailCoordinator else { return }
+            guard let self = self, let productDetailCoordinator = self.productDetailModuleBuilder.buildModule(with: self.navigationController, context: product)?.coordinator as? ProductDetailCoordinator else { return }
             
             self.coordinate(to: productDetailCoordinator).subscribe().disposed(by: self.disposeBag)
             

@@ -18,10 +18,12 @@ class ProductDetailModuleBuilder: ProductDetailModuleBuildable {
         self.container = container
     }
     
-    func buildModule<T>(with rootViewController: UINavigationController) -> Module<T>? {
+    func buildModule<T>(with rootViewController: UINavigationController, context: Any?) -> Module<T>? {
+        guard let product = context as? Product else { return nil }
+        
         registerService()
         registerUsecase()
-        registerViewModel()
+        registerViewModel(withProduct: product)
         registerView()
         registerCoordinator(rootViewController: rootViewController)
         
@@ -52,11 +54,11 @@ private extension ProductDetailModuleBuilder {
         }
     }
     
-    func registerViewModel() {
+    func registerViewModel(withProduct product: Product) {
         container.register(ProductDetailViewModel.self) { [weak self] in
             guard let useCase = self?.container.resolve(ProductDetailInteractable.self) else { return nil }
             
-            return ProductDetailViewModel(useCase: useCase)
+            return ProductDetailViewModel(useCase: useCase, product: product)
         }
     }
     
