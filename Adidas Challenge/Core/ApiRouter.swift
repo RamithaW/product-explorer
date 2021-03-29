@@ -14,6 +14,7 @@ enum ApiRouter: URLRequestConvertible {
     
     //The endpoint name we'll call later
     case getProducts
+    case saveReview(review: Review)
     
     //MARK: - URLRequestConvertible
     func asURLRequest() throws -> URLRequest {
@@ -28,13 +29,17 @@ enum ApiRouter: URLRequestConvertible {
         urlRequest.setValue(Constants.ContentType.json.rawValue, forHTTPHeaderField: Constants.HttpHeaderField.acceptType.rawValue)
         urlRequest.setValue(Constants.ContentType.json.rawValue, forHTTPHeaderField: Constants.HttpHeaderField.contentType.rawValue)
         
+        if case .saveReview = self {
+            urlRequest.setValue(ApplicationConstants.acceptLanguage, forHTTPHeaderField: Constants.HttpHeaderField.acceptLanguage.rawValue)
+        }
+        
         //Encoding
         let encoding: ParameterEncoding = {
             switch method {
             case .get:
                 return URLEncoding.default
             default:
-                return JSONEncoding.default
+                return JSONEncoding.prettyPrinted
             }
         }()
         
@@ -47,6 +52,8 @@ enum ApiRouter: URLRequestConvertible {
         switch self {
         case .getProducts:
             return .get
+        case .saveReview:
+            return .post
         }
     }
     
@@ -56,6 +63,8 @@ enum ApiRouter: URLRequestConvertible {
         switch self {
         case .getProducts:
             return "http://192.168.0.136:3001/product"
+        case let .saveReview(review):
+            return "http://localhost:3002/reviews/\(review.productId)/"
         }
     }
     
@@ -66,6 +75,11 @@ enum ApiRouter: URLRequestConvertible {
         case .getProducts:
             //A dictionary of the key (From the constants file) and its value is returned
             return [:]
+        case let .saveReview(review):
+            guard let x = try? JSONEncoder().encode(review) else { return [:] }
+            
+            let json = try? JSONSerialization.jsonObject(with: x, options: []) as? [String:Any]
+            return json
         }
     }
     
@@ -82,6 +96,7 @@ enum ApiRouter: URLRequestConvertible {
             case contentType = "Content-Type"
             case acceptType = "Accept"
             case acceptEncoding = "Accept-Encoding"
+            case acceptLanguage = "Accept-Language"
         }
         
         //The content type (JSON)

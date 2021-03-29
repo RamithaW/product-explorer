@@ -21,7 +21,7 @@ class ProductListService: ProductListServiceFetching {
     }
     
     func fetchProducts() -> Observable<[Product]> {
-        Logger.debug("Preparing to fetch product list")
+        Logger.debug("Fetching product list")
         return client.request(ApiRouter.getProducts)
     }
 }

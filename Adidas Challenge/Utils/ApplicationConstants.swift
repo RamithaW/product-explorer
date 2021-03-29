@@ -11,4 +11,5 @@ import Foundation
 public struct ApplicationConstants {
     static let currencySymbol = "€"
     static let maxRating = 5
+    static let acceptLanguage = "en-US"
 }
