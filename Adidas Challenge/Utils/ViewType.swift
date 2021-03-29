@@ -26,7 +26,7 @@ public extension ViewType {
     
     func setupObservers() {}
  
-    static func create<GenericVC: ViewType>(viewModel: GenericViewModel) -> GenericVC where GenericVC: UIViewController, GenericViewModel == GenericVC.GenericViewModel {
+    static func create<GenericVC: ViewType>(with viewModel: GenericViewModel) -> GenericVC where GenericVC: UIViewController, GenericViewModel == GenericVC.GenericViewModel {
 
         var vc = GenericVC()
         vc.viewModel = viewModel

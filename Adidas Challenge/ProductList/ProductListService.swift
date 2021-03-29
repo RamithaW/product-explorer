@@ -13,14 +13,11 @@ public protocol ProductListServiceFetching {
 }
 
 class ProductListService: ProductListServiceFetching {
-    private let disposeBag = DisposeBag()
     
     private let client: HTTPClientType
-    private let serviceErrorListener: NSObject?
     
-    public init(client: HTTPClientType, serviceErrorListener: NSObject?) {
+    public init(client: HTTPClientType) {
         self.client = client
-        self.serviceErrorListener = serviceErrorListener
     }
     
     func fetchProducts() -> Observable<[Product]> {

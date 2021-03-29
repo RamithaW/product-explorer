@@ -12,11 +12,13 @@ import RxCocoa
 
 public struct ProductListViewModelInputs {
     let loadData = PublishSubject<Void>()
+    let tappedItematIndex = PublishSubject<Int>()
 }
 
 public struct ProductListViewModelOutputs {
     let reloadView = PublishSubject<Void>()
     let showErrorStateView = PublishSubject<Bool>()
+    let showProductDetails = PublishSubject<Product>()
 }
 
 public protocol ProductListViewModellable: ViewModelType {
@@ -42,6 +44,22 @@ public class ProductListViewModel: ProductListViewModellable {
     }
     
     func setupObservers() {
+        observeDataLoading()
+        observeTappedIndices()
+    }
+    
+    public func numberOfRowsInSection() -> Int {
+        return products.count
+    }
+    
+    public func item(at index: Int) -> Product {
+        return products[index]
+    }
+}
+
+private extension ProductListViewModel {
+    
+    func observeDataLoading() {
         inputs.loadData.subscribe(onNext: { [weak self] _ in
             guard let self = self else { return }
             
@@ -56,11 +74,11 @@ public class ProductListViewModel: ProductListViewModellable {
         }).disposed(by: disposeBag)
     }
     
-    public func numberOfRowsInSection() -> Int {
-        return products.count
-    }
-    
-    public func item(at index: Int) -> Product {
-        return products[index]
+    func observeTappedIndices() {
+        inputs.tappedItematIndex.subscribe(onNext: { [weak self] (index) in
+            guard let selectedProduct = self?.products[index], let self = self else { return }
+            
+            self.outputs.showProductDetails.onNext(selectedProduct)
+        }).disposed(by: disposeBag)
     }
 }

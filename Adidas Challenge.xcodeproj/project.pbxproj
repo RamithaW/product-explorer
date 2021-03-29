@@ -33,6 +33,12 @@
 		1A085B97260FDFCC00DC9F03 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B96260FDFCC00DC9F03 /* Review.swift */; };
 		1A085B9A26108CD300DC9F03 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B9926108CD300DC9F03 /* Logger.swift */; };
 		1A085B9C26108E2100DC9F03 /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B9B26108E2100DC9F03 /* ErrorStateView.swift */; };
+		1A95A467261191D000E090CD /* ProductDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95A461261191D000E090CD /* ProductDetailUseCase.swift */; };
+		1A95A468261191D000E090CD /* ProductDetailModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95A462261191D000E090CD /* ProductDetailModuleBuilder.swift */; };
+		1A95A469261191D000E090CD /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95A463261191D000E090CD /* ProductDetailViewController.swift */; };
+		1A95A46A261191D000E090CD /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95A464261191D000E090CD /* ProductDetailViewModel.swift */; };
+		1A95A46B261191D000E090CD /* ProductDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95A465261191D000E090CD /* ProductDetailCoordinator.swift */; };
+		1A95A46C261191D000E090CD /* ProductDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95A466261191D000E090CD /* ProductDetailService.swift */; };
 		9600A79D6A1D48B250C0710F /* libPods-Adidas Challenge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD2DB39F3254EB93E7D1ECD /* libPods-Adidas Challenge.a */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +83,12 @@
 		1A085B96260FDFCC00DC9F03 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		1A085B9926108CD300DC9F03 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		1A085B9B26108E2100DC9F03 /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
+		1A95A461261191D000E090CD /* ProductDetailUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailUseCase.swift; sourceTree = "<group>"; };
+		1A95A462261191D000E090CD /* ProductDetailModuleBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailModuleBuilder.swift; sourceTree = "<group>"; };
+		1A95A463261191D000E090CD /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		1A95A464261191D000E090CD /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
+		1A95A465261191D000E090CD /* ProductDetailCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailCoordinator.swift; sourceTree = "<group>"; };
+		1A95A466261191D000E090CD /* ProductDetailService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailService.swift; sourceTree = "<group>"; };
 		36188B90ABAD9225C5A21726 /* Pods-Adidas ChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adidas ChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-Adidas ChallengeTests/Pods-Adidas ChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		6394D6C256DEACDD02B9248A /* Pods-Adidas ChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adidas ChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-Adidas ChallengeTests/Pods-Adidas ChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6FD2DB39F3254EB93E7D1ECD /* libPods-Adidas Challenge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Adidas Challenge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +139,7 @@
 		1A085B49260E815D00DC9F03 /* Adidas Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				1A95A452261190B800E090CD /* ProductDetails */,
 				1A085B7A260F0BAE00DC9F03 /* Core */,
 				1A085B74260EA0C400DC9F03 /* Utils */,
 				1A085B73260EA01800DC9F03 /* ProductList */,
@@ -235,6 +248,19 @@
 				1A085B9B26108E2100DC9F03 /* ErrorStateView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1A95A452261190B800E090CD /* ProductDetails */ = {
+			isa = PBXGroup;
+			children = (
+				1A95A465261191D000E090CD /* ProductDetailCoordinator.swift */,
+				1A95A462261191D000E090CD /* ProductDetailModuleBuilder.swift */,
+				1A95A466261191D000E090CD /* ProductDetailService.swift */,
+				1A95A461261191D000E090CD /* ProductDetailUseCase.swift */,
+				1A95A463261191D000E090CD /* ProductDetailViewController.swift */,
+				1A95A464261191D000E090CD /* ProductDetailViewModel.swift */,
+			);
+			path = ProductDetails;
 			sourceTree = "<group>";
 		};
 		25D84DC9030575469F085ABE /* Pods */ = {
@@ -409,10 +435,13 @@
 			files = (
 				1A085B83260F707100DC9F03 /* ProductListViewModel.swift in Sources */,
 				1A085B4F260E815D00DC9F03 /* ViewController.swift in Sources */,
+				1A95A467261191D000E090CD /* ProductDetailUseCase.swift in Sources */,
 				1A085B89260F727E00DC9F03 /* ProductListViewController.swift in Sources */,
 				1A085B4B260E815D00DC9F03 /* AppDelegate.swift in Sources */,
+				1A95A469261191D000E090CD /* ProductDetailViewController.swift in Sources */,
 				1A085B72260E9C1E00DC9F03 /* AppCoordinator.swift in Sources */,
 				1A085B9C26108E2100DC9F03 /* ErrorStateView.swift in Sources */,
+				1A95A46C261191D000E090CD /* ProductDetailService.swift in Sources */,
 				1A085B7C260F0C7400DC9F03 /* Module.swift in Sources */,
 				1A085B90260FD33800DC9F03 /* ViewType.swift in Sources */,
 				1A085B7E260F6DF600DC9F03 /* ProductListCoordinator.swift in Sources */,
@@ -420,13 +449,16 @@
 				1A085B87260F721800DC9F03 /* ProductListUseCase.swift in Sources */,
 				1A085B8B260FB2A000DC9F03 /* HttpClient.swift in Sources */,
 				1A085B95260FDFBA00DC9F03 /* Product.swift in Sources */,
+				1A95A468261191D000E090CD /* ProductDetailModuleBuilder.swift in Sources */,
 				1A085B4D260E815D00DC9F03 /* SceneDelegate.swift in Sources */,
 				1A085B92260FDED700DC9F03 /* ApiRouter.swift in Sources */,
 				1A085B97260FDFCC00DC9F03 /* Review.swift in Sources */,
 				1A085B9A26108CD300DC9F03 /* Logger.swift in Sources */,
 				1A085B8D260FBC0A00DC9F03 /* UIWindow+Utils.swift in Sources */,
+				1A95A46B261191D000E090CD /* ProductDetailCoordinator.swift in Sources */,
 				1A085B85260F717E00DC9F03 /* ProductListService.swift in Sources */,
 				1A085B77260EA0DD00DC9F03 /* DependencyManager.swift in Sources */,
+				1A95A46A261191D000E090CD /* ProductDetailViewModel.swift in Sources */,
 				1A085B6E260E9B8A00DC9F03 /* BaseCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -127,5 +127,7 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
         preconditionFailure("Could not dequeue cell for product list tableview")
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.inputs.tappedItematIndex.onNext(indexPath.row)
+    }
 }

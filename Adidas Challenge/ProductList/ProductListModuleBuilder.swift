@@ -14,7 +14,6 @@ public protocol ProductListModuleBuildable: ModuleBuildable {}
 public class ProductListModuleBuilder: ProductListModuleBuildable {
     
     private let container: DependencyManager
-    var disposeBag = DisposeBag()
     
     public init(container: DependencyManager) {
         self.container = container
@@ -44,7 +43,7 @@ public class ProductListModuleBuilder: ProductListModuleBuildable {
         container.register(ProductListServiceFetching.self) { [weak self] in
             guard let httpClient = self?.container.resolve(HTTPClientType.self) else { return nil}
             
-            return ProductListService(client: httpClient, serviceErrorListener: nil)
+            return ProductListService(client: httpClient)
         }
     }
     
@@ -60,16 +59,17 @@ public class ProductListModuleBuilder: ProductListModuleBuildable {
         container.register(ProductListViewController.self) { [weak self] in
             guard let viewModel = self?.container.resolve(ProductListViewModellable.self) else { return nil }
             
-            return ProductListViewController.create(viewModel: viewModel)
+            return ProductListViewController.create(with: viewModel)
         }
     }
     
     func registerCoordinator(window: UIWindow) {
         container.register(ProductListCoordinator.self) { [weak self] in
-            guard let viewController = self?.container.resolve(ProductListViewController.self)
-                else { return nil }
+            guard let self = self, let viewController = self.container.resolve(ProductListViewController.self) else { return nil }
             
-            let coordinator = ProductListCoordinator(window: window, viewController: viewController)
+            let productDetailModuleBuilder = ProductDetailModuleBuilder(container: self.container)
+            let coordinator = ProductListCoordinator(window: window, viewController: viewController, productDetailModuleBuilder: productDetailModuleBuilder)
+            coordinator.showProductDetails = viewController.viewModel.outputs.showProductDetails
             return coordinator
         }
     }
