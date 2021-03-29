@@ -23,6 +23,8 @@ class ProductListViewController: UIViewController, ViewType {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.showsVerticalScrollIndicator = false
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.addSubview(refreshControl)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -40,8 +42,6 @@ class ProductListViewController: UIViewController, ViewType {
         setupConstraints()
         setupObservers()
         
-        tableView.delegate = self
-        tableView.dataSource = self
         viewModel.inputs.loadData.onNext(())
     }
     

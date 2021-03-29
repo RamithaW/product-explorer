@@ -15,6 +15,7 @@ class ProductDetailViewController: UIViewController, ViewType {
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -30,14 +31,15 @@ class ProductDetailViewController: UIViewController, ViewType {
         let label = UILabel()
         label.backgroundColor = .red
         label.text = "Product name"
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var productPriceLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .blue
-        label.text = "dasds"
+        label.backgroundColor = .yellow
+        label.text = "$100.00"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -45,17 +47,17 @@ class ProductDetailViewController: UIViewController, ViewType {
     lazy var productDescriptionLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .yellow
-        label.text = "dasds"
+        label.text = "Description here"
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    lazy var dummyView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
 
 	override func viewDidLoad() {
@@ -86,8 +88,12 @@ extension ProductDetailViewController {
         scrollView.addSubview(productNameLabel)
         scrollView.addSubview(productPriceLabel)
         scrollView.addSubview(productDescriptionLabel)
-        scrollView.addSubview(dummyView)
+        scrollView.addSubview(stackView)
         scrollView.backgroundColor = .green
+        
+        for _ in 1 ... 20 {
+            stackView.addArrangedSubview(ReviewView())
+        }
     }
 
     func setupConstraints() {
@@ -112,14 +118,61 @@ extension ProductDetailViewController {
             productDescriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             productDescriptionLabel.rightAnchor.constraint(lessThanOrEqualTo: view.rightAnchor, constant: -20),
             
-            dummyView.topAnchor.constraint(equalTo: productDescriptionLabel.bottomAnchor, constant: 20),
-            dummyView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            dummyView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            dummyView.heightAnchor.constraint(equalToConstant: 500),
-            
-            dummyView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
+            stackView.topAnchor.constraint(equalTo: productDescriptionLabel.bottomAnchor, constant: 20),
+            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
         ])
     }
 
     func setupObservers() {}
 }
+
+class ReviewView: UIView {
+    
+    lazy var reviewTextLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Review text here.."
+        label.backgroundColor = .systemPink
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var ratingLabel: UILabel = {
+        let label = UILabel()
+        label.text = "3 out of 5"
+        label.font = label.font.withSize(10)
+        label.backgroundColor = .orange
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    init(){
+        super.init(frame: .zero)
+        setupUI()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupUI() {
+        backgroundColor = .white
+        addSubview(reviewTextLabel)
+        addSubview(ratingLabel)
+    }
+    
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            ratingLabel.topAnchor.constraint(equalTo: topAnchor),
+            ratingLabel.rightAnchor.constraint(equalTo: rightAnchor),
+            
+            reviewTextLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 2),
+            reviewTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            reviewTextLabel.leftAnchor.constraint(equalTo: leftAnchor),
+            reviewTextLabel.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor)
+        ])
+    }
+}
+
