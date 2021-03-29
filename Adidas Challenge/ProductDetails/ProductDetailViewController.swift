@@ -145,7 +145,7 @@ extension ProductDetailViewController {
             productReviewTitleLabel.topAnchor.constraint(equalTo: productDescriptionLabel.bottomAnchor, constant: 25),
             productReviewTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             
-            stackView.topAnchor.constraint(equalTo: productReviewTitleLabel.bottomAnchor, constant: 5),
+            stackView.topAnchor.constraint(equalTo: productReviewTitleLabel.bottomAnchor),
             stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
