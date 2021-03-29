@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ProductDetailViewController: UIViewController, ViewType {
 
@@ -17,6 +18,7 @@ class ProductDetailViewController: UIViewController, ViewType {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
         return scrollView
     }()
     
@@ -59,12 +61,21 @@ class ProductDetailViewController: UIViewController, ViewType {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    lazy var footer: ProductDetailFooterView = {
+        let footer = ProductDetailFooterView()
+        footer.translatesAutoresizingMaskIntoConstraints = false
+        return footer
+    }()
 
 	override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
         setupObservers()
+        footer.footerButtonTapped.subscribe { _ in
+            print("Button tapped")
+        }.disposed(by: viewModel.disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,6 +101,7 @@ extension ProductDetailViewController {
         scrollView.addSubview(productDescriptionLabel)
         scrollView.addSubview(stackView)
         scrollView.backgroundColor = .green
+        view.addSubview(footer)
         
         for _ in 1 ... 20 {
             stackView.addArrangedSubview(ReviewView())
@@ -122,57 +134,12 @@ extension ProductDetailViewController {
             stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
+            
+            footer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            footer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            footer.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
     }
 
     func setupObservers() {}
 }
-
-class ReviewView: UIView {
-    
-    lazy var reviewTextLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Review text here.."
-        label.backgroundColor = .systemPink
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var ratingLabel: UILabel = {
-        let label = UILabel()
-        label.text = "3 out of 5"
-        label.font = label.font.withSize(10)
-        label.backgroundColor = .orange
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    init(){
-        super.init(frame: .zero)
-        setupUI()
-        setupConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setupUI() {
-        backgroundColor = .white
-        addSubview(reviewTextLabel)
-        addSubview(ratingLabel)
-    }
-    
-    func setupConstraints() {
-        NSLayoutConstraint.activate([
-            ratingLabel.topAnchor.constraint(equalTo: topAnchor),
-            ratingLabel.rightAnchor.constraint(equalTo: rightAnchor),
-            
-            reviewTextLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 2),
-            reviewTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-            reviewTextLabel.leftAnchor.constraint(equalTo: leftAnchor),
-            reviewTextLabel.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor)
-        ])
-    }
-}
-
