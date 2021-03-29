@@ -16,6 +16,7 @@ public struct ProductListViewModelInputs {
 
 public struct ProductListViewModelOutputs {
     let reloadView = PublishSubject<Void>()
+    let showErrorStateView = PublishSubject<Bool>()
 }
 
 public protocol ProductListViewModellable: ViewModelType {
@@ -47,7 +48,9 @@ public class ProductListViewModel: ProductListViewModellable {
             self.useCase.fetchProducts().subscribe(onNext: { p in
                 self.products = p
                 self.outputs.reloadView.onNext(())
+                self.outputs.showErrorStateView.onNext(false)
             }, onError: { (error) in
+                self.outputs.showErrorStateView.onNext(true)
                 print("Error while fetching data from the backend")
             }).disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)

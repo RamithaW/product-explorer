@@ -24,8 +24,14 @@ class ProductListViewController: UIViewController, ViewType {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.showsVerticalScrollIndicator = false
         tableView.addSubview(refreshControl)
-        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
+    }()
+    
+    lazy var errorStateView: ErrorStateView = {
+        let loadingView = ErrorStateView()
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        return loadingView
     }()
     
     override func viewDidLoad() {
@@ -45,8 +51,6 @@ class ProductListViewController: UIViewController, ViewType {
     }
     
     func setupConstraints() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -55,8 +59,29 @@ class ProductListViewController: UIViewController, ViewType {
         ])
     }
     
+    func showErrorStateView() {
+        view.addSubview(errorStateView)
+        NSLayoutConstraint.activate([
+            errorStateView.topAnchor.constraint(equalTo: view.topAnchor),
+            errorStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            errorStateView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            errorStateView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+    }
+    
+    func hideErrorStateView() {
+        UIView.animate(withDuration: 1.5, animations: { [weak self] in
+            self?.errorStateView.alpha = 0
+        }) {[weak self] _ in
+            self?.errorStateView.alpha = 1
+            self?.errorStateView.removeFromSuperview()
+        }
+        
+    }
+    
     func setupObservers() {
         observeViewReloading()
+        observeErrorStateView()
     }
     
     @objc func refresh(_ sender: AnyObject) {
@@ -73,6 +98,12 @@ private extension ProductListViewController {
         viewModel.outputs.reloadView.subscribe(onNext: { [weak self] _ in
             self?.refreshControl.endRefreshing()
             self?.tableView.reloadData()
+        }).disposed(by: viewModel.disposeBag)
+    }
+    
+    func observeErrorStateView() {
+        viewModel.outputs.showErrorStateView.subscribe(onNext: { [weak self] (shouldShow) in
+            shouldShow ? self?.showErrorStateView() : self?.hideErrorStateView()
         }).disposed(by: viewModel.disposeBag)
     }
 }

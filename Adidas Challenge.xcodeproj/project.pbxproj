@@ -32,6 +32,7 @@
 		1A085B95260FDFBA00DC9F03 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B94260FDFBA00DC9F03 /* Product.swift */; };
 		1A085B97260FDFCC00DC9F03 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B96260FDFCC00DC9F03 /* Review.swift */; };
 		1A085B9A26108CD300DC9F03 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B9926108CD300DC9F03 /* Logger.swift */; };
+		1A085B9C26108E2100DC9F03 /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A085B9B26108E2100DC9F03 /* ErrorStateView.swift */; };
 		9600A79D6A1D48B250C0710F /* libPods-Adidas Challenge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD2DB39F3254EB93E7D1ECD /* libPods-Adidas Challenge.a */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		1A085B94260FDFBA00DC9F03 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		1A085B96260FDFCC00DC9F03 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		1A085B9926108CD300DC9F03 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		1A085B9B26108E2100DC9F03 /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
 		36188B90ABAD9225C5A21726 /* Pods-Adidas ChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adidas ChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-Adidas ChallengeTests/Pods-Adidas ChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		6394D6C256DEACDD02B9248A /* Pods-Adidas ChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adidas ChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-Adidas ChallengeTests/Pods-Adidas ChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6FD2DB39F3254EB93E7D1ECD /* libPods-Adidas Challenge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Adidas Challenge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +232,7 @@
 		1A085B982610666000DC9F03 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1A085B9B26108E2100DC9F03 /* ErrorStateView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				1A085B89260F727E00DC9F03 /* ProductListViewController.swift in Sources */,
 				1A085B4B260E815D00DC9F03 /* AppDelegate.swift in Sources */,
 				1A085B72260E9C1E00DC9F03 /* AppCoordinator.swift in Sources */,
+				1A085B9C26108E2100DC9F03 /* ErrorStateView.swift in Sources */,
 				1A085B7C260F0C7400DC9F03 /* Module.swift in Sources */,
 				1A085B90260FD33800DC9F03 /* ViewType.swift in Sources */,
 				1A085B7E260F6DF600DC9F03 /* ProductListCoordinator.swift in Sources */,

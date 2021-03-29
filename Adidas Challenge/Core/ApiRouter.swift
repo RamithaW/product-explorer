@@ -3,6 +3,7 @@
 //  Adidas Challenge
 //
 //  Created by Ramitha Wirasinha on 3/28/21.
+//  Reference: https://medium.com/@marioamgad9/swift-4-2-building-a-network-layer-using-alamofire-and-rxswift-e044b5636d55
 //  Copyright © 2021 Ramitha Wirasinha. All rights reserved.
 //
 
