@@ -63,8 +63,8 @@ private extension ProductListViewModel {
         inputs.loadData.subscribe(onNext: { [weak self] _ in
             guard let self = self else { return }
             
-            self.useCase.fetchProducts().subscribe(onNext: { p in
-                self.products = p
+            self.useCase.fetchProducts().subscribe(onNext: { products in
+                self.products = products
                 self.outputs.reloadView.onNext(())
                 self.outputs.showErrorStateView.onNext(false)
             }, onError: { (error) in
