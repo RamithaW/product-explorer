@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import Nuke
 
 class ProductDetailViewController: UIViewController, ViewType {
 
@@ -23,15 +24,13 @@ class ProductDetailViewController: UIViewController, ViewType {
     
     lazy var productImageView: UIImageView = {
         let imageview = UIImageView()
-        imageview.backgroundColor = .red
+        imageview.contentMode = .scaleAspectFit
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
     }()
     
     lazy var productNameLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .red
-        label.text = "Product name"
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -39,15 +38,12 @@ class ProductDetailViewController: UIViewController, ViewType {
     
     lazy var productPriceLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .yellow
-        label.text = "$100.00"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var productDescriptionTitleLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .yellow
         label.text = "Product Description"
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -176,6 +172,9 @@ extension ProductDetailViewController {
                 self.stackView.addArrangedSubview(ReviewView(withReview: review))
             }
             
+            guard let imageURL = URL(string: product.imgUrl) else { return }
+            
+            Nuke.loadImage(with: imageURL, into: self.productImageView)
         }).disposed(by: viewModel.disposeBag)
     }
 }

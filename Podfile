@@ -7,6 +7,7 @@ target 'Adidas Challenge' do
   pod 'RxCocoa', '~> 5'
   pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'alamofire5'
   pod 'SwiftyBeaver'
+  pod 'Nuke'
 
   target 'Adidas ChallengeTests' do
     inherit! :search_paths
