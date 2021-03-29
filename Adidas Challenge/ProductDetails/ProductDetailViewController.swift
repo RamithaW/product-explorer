@@ -18,7 +18,6 @@ class ProductDetailViewController: UIViewController, ViewType {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
         return scrollView
     }()
     
@@ -73,9 +72,6 @@ class ProductDetailViewController: UIViewController, ViewType {
         setupUI()
         setupConstraints()
         setupObservers()
-        footer.footerButtonTapped.subscribe { _ in
-            print("Button tapped")
-        }.disposed(by: viewModel.disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,6 +102,7 @@ extension ProductDetailViewController {
         for _ in 1 ... 20 {
             stackView.addArrangedSubview(ReviewView())
         }
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: footer.systemLayoutSizeFitting(UIScreen.main.bounds.size).height, right: 0)
     }
 
     func setupConstraints() {
@@ -133,7 +130,7 @@ extension ProductDetailViewController {
             stackView.topAnchor.constraint(equalTo: productDescriptionLabel.bottomAnchor, constant: 20),
             stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             footer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             footer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -141,5 +138,9 @@ extension ProductDetailViewController {
         ])
     }
 
-    func setupObservers() {}
+    func setupObservers() {
+        footer.footerButtonTapped.subscribe { _ in
+            print("Button tapped")
+        }.disposed(by: viewModel.disposeBag)
+    }
 }
