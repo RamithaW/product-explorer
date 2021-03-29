@@ -31,6 +31,7 @@ class ProductDetailViewController: UIViewController, ViewType {
     
     lazy var productNameLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -38,6 +39,7 @@ class ProductDetailViewController: UIViewController, ViewType {
     
     lazy var productPriceLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -45,6 +47,7 @@ class ProductDetailViewController: UIViewController, ViewType {
     lazy var productDescriptionTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Product Description"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -52,6 +55,7 @@ class ProductDetailViewController: UIViewController, ViewType {
     
     lazy var productDescriptionLabel: UILabel = {
         let label = UILabel()
+        label.font = label.font.withSize(14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -59,6 +63,7 @@ class ProductDetailViewController: UIViewController, ViewType {
     lazy var productReviewTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Reviews"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -122,7 +127,7 @@ extension ProductDetailViewController {
             productImageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             productImageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -40),
             productImageView.heightAnchor.constraint(equalToConstant: 200),
-            productImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+            productImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             
             productNameLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 10),
             productNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),

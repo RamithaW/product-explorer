@@ -12,7 +12,7 @@ class ReviewView: UIView {
     
     lazy var reviewTextLabel: UILabel = {
         let label = UILabel()
-        label.font = label.font.withSize(13)
+        label.font = label.font.withSize(14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
