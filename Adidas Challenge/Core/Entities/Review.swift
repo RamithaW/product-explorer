@@ -8,7 +8,15 @@
 
 import Foundation
 
-public struct Review: Codable {
+public struct Review: Codable, Hashable {
+    
+    public static func == (lhs: Review, rhs: Review) -> Bool {
+        return lhs.productId == rhs.productId &&
+            lhs.locale == rhs.locale &&
+            lhs.rating == rhs.rating &&
+            lhs.text == rhs.text
+    }
+    
     let productId: String
     let locale: String
     let rating: Int

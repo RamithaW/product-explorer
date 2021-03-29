@@ -13,6 +13,7 @@ import RxCocoa
 public struct ProductListViewModelInputs {
     let loadData = PublishSubject<Void>()
     let tappedItematIndex = PublishSubject<Int>()
+    let searchPhraseEntered = PublishSubject<String>()
 }
 
 public struct ProductListViewModelOutputs {
@@ -33,6 +34,7 @@ public class ProductListViewModel: ProductListViewModellable {
     
     private let useCase: ProductListInteractable
     private var products = [Product]()
+    private var searchedProducts = [Product]()
     
     public let inputs = ProductListViewModelInputs()
     public let outputs = ProductListViewModelOutputs()
@@ -46,6 +48,7 @@ public class ProductListViewModel: ProductListViewModellable {
     func setupObservers() {
         observeDataLoading()
         observeTappedIndices()
+        observeSearchPhrase()
     }
     
     public func numberOfRowsInSection() -> Int {
@@ -65,6 +68,7 @@ private extension ProductListViewModel {
             
             self.useCase.fetchProducts().subscribe(onNext: { products in
                 self.products = products
+                self.searchedProducts = products
                 self.outputs.reloadView.onNext(())
                 self.outputs.showErrorStateView.onNext(false)
             }, onError: { (error) in
@@ -79,6 +83,43 @@ private extension ProductListViewModel {
             guard let selectedProduct = self?.products[index], let self = self else { return }
             
             self.outputs.showProductDetails.onNext(selectedProduct)
+        }).disposed(by: disposeBag)
+    }
+    
+    func observeSearchPhrase() {
+        inputs.searchPhraseEntered.subscribe(onNext: { [weak self] (searchPhrase) in
+            guard let self = self else { return }
+            
+            self.products = self.searchedProducts
+            self.outputs.reloadView.onNext(())
+            
+            guard !searchPhrase.isEmpty else {
+                self.products = self.searchedProducts
+                return
+            }
+            
+            var searchResults = [Product]()
+            // Search the Id
+            searchResults.append(contentsOf: self.products.filter { (product) -> Bool in
+                product.id.lowercased().contains(searchPhrase.lowercased())
+            })
+            // Search the description
+            searchResults.append(contentsOf: self.products.filter { (product) -> Bool in
+                product.description.lowercased().contains(searchPhrase.lowercased())
+            })
+            // Search the name
+            searchResults.append(contentsOf: self.products.filter { (product) -> Bool in
+                product.name.lowercased().contains(searchPhrase.lowercased())
+            })
+            // Search the price
+            searchResults.append(contentsOf: self.products.filter { (product) -> Bool in
+                String(product.price).contains(searchPhrase)
+            })
+            
+            // remove duplicates
+            self.products = searchResults.uniqued()
+            self.outputs.reloadView.onNext(())
+            
         }).disposed(by: disposeBag)
     }
 }

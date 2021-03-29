@@ -48,6 +48,14 @@ class ProductListViewController: UIViewController, ViewType {
     func setupUI() {
         view.backgroundColor = .white
         view.addSubview(tableView)
+        
+        let search = UISearchController(searchResultsController: nil)
+        search.searchResultsUpdater = self
+        search.obscuresBackgroundDuringPresentation = false
+        search.searchBar.placeholder = "Type something here to search"
+        navigationItem.searchController = search
+        
+        title = "Adidas"
     }
     
     func setupConstraints() {
@@ -76,7 +84,6 @@ class ProductListViewController: UIViewController, ViewType {
             self?.errorStateView.alpha = 1
             self?.errorStateView.removeFromSuperview()
         }
-        
     }
     
     func setupObservers() {
@@ -129,5 +136,14 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.inputs.tappedItematIndex.onNext(indexPath.row)
+    }
+}
+
+extension ProductListViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        
+        viewModel.inputs.searchPhraseEntered.onNext(text)
     }
 }

@@ -8,7 +8,12 @@
 
 import Foundation
 
-public struct Product: Codable {
+public struct Product: Codable, Hashable {
+    
+    public static func == (lhs: Product, rhs: Product) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     let currency: String
     let price: Int
     let id: String
