@@ -31,9 +31,11 @@ public class HttpClient: HTTPClientType {
                 switch response.result {
                 case .success(let value):
                     //Everything is fine, return the value in onNext
+                    Logger.info("Request completed")
                     observer.onNext(value)
                     observer.onCompleted()
                 case .failure(let error):
+                    Logger.error("Error response for \(urlConvertible.urlRequest?.url?.absoluteString)")
                     //Something went wrong, switch on the status code and return the error
                     switch response.response?.statusCode {
                     case 404:
