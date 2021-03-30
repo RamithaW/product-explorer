@@ -21,11 +21,14 @@ class ProductDetailFooterView: UIView {
         return button
     }()
     
-    init() {
+    init(showShadow shadow: Bool = false) {
         super.init(frame: .zero)
         setupUI()
         setupConstraints()
         setupObservers()
+        guard shadow else { return }
+        
+        self.showShadow()
     }
     
     required init?(coder: NSCoder) {
@@ -35,6 +38,13 @@ class ProductDetailFooterView: UIView {
     func setupUI() {
         backgroundColor = .white
         addSubview(button)
+    }
+    
+    func showShadow() {
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowOpacity = 0.4
+        layer.shadowOffset = .zero
+        layer.shadowRadius = 6
     }
     
     func setupConstraints(){

@@ -76,7 +76,7 @@ class ProductDetailViewController: UIViewController, ViewType {
     }()
     
     lazy var footer: ProductDetailFooterView = {
-        let footer = ProductDetailFooterView()
+        let footer = ProductDetailFooterView(showShadow: true)
         footer.translatesAutoresizingMaskIntoConstraints = false
         return footer
     }()
