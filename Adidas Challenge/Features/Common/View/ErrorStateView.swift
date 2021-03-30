@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ErrorStateView: UIView {
     
@@ -25,11 +26,14 @@ class ErrorStateView: UIView {
         return button
     }()
     
-    init() {
+    let disposeBag = DisposeBag()
+    
+    init(reloadButtonTapped: PublishSubject<Void>) {
         super.init(frame: .zero)
         backgroundColor = .white
         setupView()
         setupConstraints()
+        reloadButton.rx.tap.bind(to: reloadButtonTapped).disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {

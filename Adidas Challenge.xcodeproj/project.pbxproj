@@ -52,6 +52,8 @@
 		1A95A49A2613AC9C00E090CD /* ProductListServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95A4992613AC9C00E090CD /* ProductListServiceMock.swift */; };
 		1AE7A25726137A0200E16AD1 /* ProductListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7A25626137A0200E16AD1 /* ProductListViewModelTests.swift */; };
 		1AE7A25E26137B2C00E16AD1 /* ProductListUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7A25D26137B2C00E16AD1 /* ProductListUseCaseMock.swift */; };
+		1AE7A2AE2613B99000E16AD1 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7A2AD2613B99000E16AD1 /* LoadingView.swift */; };
+		1AE7A2B32613B9D800E16AD1 /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7A2B22613B9D800E16AD1 /* UIViewController+Utils.swift */; };
 		1C6262E68961082AE4E0917E /* libPods-Adidas ChallengeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE8C4AAD1904C99FF6044B0C /* libPods-Adidas ChallengeTests.a */; };
 		53F128EBF1A1798369A74722 /* libPods-Adidas Challenge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 488EE96E379A4FDEDEE02B3B /* libPods-Adidas Challenge.a */; };
 /* End PBXBuildFile section */
@@ -116,6 +118,8 @@
 		1A95A4992613AC9C00E090CD /* ProductListServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListServiceMock.swift; sourceTree = "<group>"; };
 		1AE7A25626137A0200E16AD1 /* ProductListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModelTests.swift; sourceTree = "<group>"; };
 		1AE7A25D26137B2C00E16AD1 /* ProductListUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListUseCaseMock.swift; sourceTree = "<group>"; };
+		1AE7A2AD2613B99000E16AD1 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		1AE7A2B22613B9D800E16AD1 /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		36188B90ABAD9225C5A21726 /* Pods-Adidas ChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adidas ChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-Adidas ChallengeTests/Pods-Adidas ChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		488EE96E379A4FDEDEE02B3B /* libPods-Adidas Challenge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Adidas Challenge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6394D6C256DEACDD02B9248A /* Pods-Adidas ChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adidas ChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-Adidas ChallengeTests/Pods-Adidas ChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -225,11 +229,10 @@
 		1A085B74260EA0C400DC9F03 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				1A085B8C260FBC0A00DC9F03 /* UIWindow+Utils.swift */,
+				1AE7A2B12613B9C300E16AD1 /* Extensions */,
 				1A085B8F260FD33800DC9F03 /* ViewType.swift */,
 				1A085B9926108CD300DC9F03 /* Logger.swift */,
 				1A95A4732611E87000E090CD /* ApplicationConstants.swift */,
-				1A95A4792612134A00E090CD /* Sequence+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -258,7 +261,6 @@
 		1A085B982610666000DC9F03 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1A085B9B26108E2100DC9F03 /* ErrorStateView.swift */,
 				1A95A47B2612145400E090CD /* ProductCell.swift */,
 			);
 			path = View;
@@ -298,6 +300,7 @@
 		1A95A4752611F60D00E090CD /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				1AE7A2AB2613B97100E16AD1 /* Common */,
 				1A95A47D261245C300E090CD /* AddReview */,
 				1A085B73260EA01800DC9F03 /* ProductList */,
 				1A95A452261190B800E090CD /* ProductDetails */,
@@ -343,6 +346,33 @@
 				1A95A4992613AC9C00E090CD /* ProductListServiceMock.swift */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		1AE7A2AB2613B97100E16AD1 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1AE7A2AC2613B98000E16AD1 /* View */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		1AE7A2AC2613B98000E16AD1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1A085B9B26108E2100DC9F03 /* ErrorStateView.swift */,
+				1AE7A2AD2613B99000E16AD1 /* LoadingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1AE7A2B12613B9C300E16AD1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1A95A4792612134A00E090CD /* Sequence+Utils.swift */,
+				1A085B8C260FBC0A00DC9F03 /* UIWindow+Utils.swift */,
+				1AE7A2B22613B9D800E16AD1 /* UIViewController+Utils.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		25D84DC9030575469F085ABE /* Pods */ = {
@@ -526,12 +556,14 @@
 				1A95A46C261191D000E090CD /* ProductDetailService.swift in Sources */,
 				1A085B7C260F0C7400DC9F03 /* Module.swift in Sources */,
 				1A95A47C2612145400E090CD /* ProductCell.swift in Sources */,
+				1AE7A2B32613B9D800E16AD1 /* UIViewController+Utils.swift in Sources */,
 				1A95A46F2611E49200E090CD /* ProductDetailFooterView.swift in Sources */,
 				1A085B90260FD33800DC9F03 /* ViewType.swift in Sources */,
 				1A95A4922612463400E090CD /* AddReviewCoordinator.swift in Sources */,
 				1A085B7E260F6DF600DC9F03 /* ProductListCoordinator.swift in Sources */,
 				1A085B79260F0B8A00DC9F03 /* ProductListModuleBuilder.swift in Sources */,
 				1A085B87260F721800DC9F03 /* ProductListUseCase.swift in Sources */,
+				1AE7A2AE2613B99000E16AD1 /* LoadingView.swift in Sources */,
 				1A085B8B260FB2A000DC9F03 /* HttpClient.swift in Sources */,
 				1A085B95260FDFBA00DC9F03 /* Product.swift in Sources */,
 				1A95A468261191D000E090CD /* ProductDetailModuleBuilder.swift in Sources */,

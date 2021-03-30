@@ -14,12 +14,14 @@ public struct ProductListViewModelInputs {
     let loadData = PublishSubject<Void>()
     let tappedItemAtIndex = PublishSubject<Int>()
     let searchPhraseEntered = PublishSubject<String>()
+    let reloadButtonTapped = PublishSubject<Void>()
 }
 
 public struct ProductListViewModelOutputs {
     let reloadView = PublishSubject<Void>()
     let showErrorStateView = PublishSubject<Bool>()
     let showProductDetails = PublishSubject<Product>()
+    let showLoadingView = PublishSubject<Bool>()
 }
 
 public protocol ProductListViewModellable: ViewModelType {
@@ -49,6 +51,7 @@ public class ProductListViewModel: ProductListViewModellable {
         observeDataLoading()
         observeTappedIndices()
         observeSearchPhrase()
+        inputs.reloadButtonTapped.bind(to: inputs.loadData).disposed(by: disposeBag)
     }
     
     public func numberOfRowsInSection() -> Int {
@@ -66,12 +69,15 @@ private extension ProductListViewModel {
         inputs.loadData.subscribe(onNext: { [weak self] _ in
             guard let self = self else { return }
             
+            self.outputs.showLoadingView.onNext(true)
+            
             self.useCase.fetchProducts().subscribe(onNext: { products in
                 self.products = products
                 self.searchedProducts = products
                 self.outputs.reloadView.onNext(())
                 self.outputs.showErrorStateView.onNext(false)
             }, onError: { (error) in
+                self.outputs.showLoadingView.onNext(false)
                 self.outputs.showErrorStateView.onNext(true)
                 print("Error while fetching data from the backend")
             }).disposed(by: self.disposeBag)
