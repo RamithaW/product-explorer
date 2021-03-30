@@ -12,6 +12,7 @@ target 'Adidas Challenge' do
   target 'Adidas ChallengeTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'RxTest', '~> 5'
   end
 
 end

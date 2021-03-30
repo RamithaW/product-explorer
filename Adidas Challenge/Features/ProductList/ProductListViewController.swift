@@ -135,7 +135,7 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.inputs.tappedItematIndex.onNext(indexPath.row)
+        viewModel.inputs.tappedItemAtIndex.onNext(indexPath.row)
     }
 }
 

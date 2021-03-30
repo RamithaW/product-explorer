@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Review: Codable, Hashable {
+public struct Review: Codable, Hashable, Equatable {
     
     public static func == (lhs: Review, rhs: Review) -> Bool {
         return lhs.productId == rhs.productId &&

@@ -12,7 +12,7 @@ import RxCocoa
 
 public struct ProductListViewModelInputs {
     let loadData = PublishSubject<Void>()
-    let tappedItematIndex = PublishSubject<Int>()
+    let tappedItemAtIndex = PublishSubject<Int>()
     let searchPhraseEntered = PublishSubject<String>()
 }
 
@@ -79,7 +79,7 @@ private extension ProductListViewModel {
     }
     
     func observeTappedIndices() {
-        inputs.tappedItematIndex.subscribe(onNext: { [weak self] (index) in
+        inputs.tappedItemAtIndex.subscribe(onNext: { [weak self] (index) in
             guard let selectedProduct = self?.products[index], let self = self else { return }
             
             self.outputs.showProductDetails.onNext(selectedProduct)
