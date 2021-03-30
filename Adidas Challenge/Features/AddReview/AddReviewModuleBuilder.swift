@@ -82,6 +82,7 @@ private extension AddReviewModuleBuilder {
             }
             
             let coordinator = AddReviewCoordinator(rootViewController: rootViewController, viewController: viewController)
+            coordinator.reviewAdded = viewController.viewModel.outputs.reviewAdded
             return coordinator
         }
     }

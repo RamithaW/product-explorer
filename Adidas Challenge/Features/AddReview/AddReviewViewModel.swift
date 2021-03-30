@@ -19,7 +19,7 @@ struct AddReviewViewModelInputs {
 }
 
 struct AddReviewViewModelOutputs {
-    let reviewAdded = PublishSubject<Void>()
+    let reviewAdded = PublishSubject<Review>()
 }
 
 class AddReviewViewModel: AddReviewViewModellable {
@@ -53,7 +53,9 @@ private extension AddReviewViewModel {
             
             // Currently hardcoding the rating, ideally I would implement stars so the user can tap to input
             self.useCase.saveReview(Review(productId: self.product.id, locale: "en-US", rating: 4, text: comment)).subscribe(onNext: { review in
-                self.outputs.reviewAdded.onNext(())
+                self.outputs.reviewAdded.onNext(review)
+            }, onError: { (error) in
+                Logger.error("Error saving review")
             }).disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
     }

@@ -13,6 +13,8 @@ class AddReviewCoordinator: BaseCoordinator<Void> {
     
     private weak var rootViewController: UIViewController?
     private let viewController: UIViewController
+    var dismiss = PublishSubject<Void>()
+    var reviewAdded = PublishSubject<Review>()
     
     init(rootViewController: UIViewController?, viewController: UIViewController) {
         self.rootViewController = rootViewController
@@ -22,6 +24,12 @@ class AddReviewCoordinator: BaseCoordinator<Void> {
     override public func start() -> Observable<Void> {
         rootViewController?.present(viewController, animated: true, completion: nil)
         
-        return .never()
+        reviewAdded.subscribe { [weak self] _ in
+            self?.dismiss.onNext(())
+        }.disposed(by: disposeBag)
+        
+        return dismiss.take(1).do(onDispose: { [weak self] in
+            self?.viewController.dismiss(animated: true, completion: nil)
+        })
     }
 }
