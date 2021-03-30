@@ -62,9 +62,9 @@ enum ApiRouter: URLRequestConvertible {
     private var path: String {
         switch self {
         case .getProducts:
-            return "http://192.168.0.136:3001/product"
+            return "\(ApplicationConstants.baseUrl):3001/product"
         case let .saveReview(review):
-            return "http://localhost:3002/reviews/\(review.productId)/"
+            return "\(ApplicationConstants.baseUrl):3002/reviews/\(review.productId)/"
         }
     }
     

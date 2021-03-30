@@ -15,22 +15,25 @@ class AddReviewViewController: UIViewController, ViewType {
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Let's write a review"
+        label.text = "Write a review"
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    lazy var footer: ProductDetailFooterView = {
-        let footer = ProductDetailFooterView()
-        footer.translatesAutoresizingMaskIntoConstraints = false
-        return footer
+    lazy var sendButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Send", for: .normal)
+        return button
     }()
     
     lazy var textView: UITextView = {
         let textView = UITextView()
-        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.layer.borderColor = UIColor.systemGray5.cgColor
         textView.layer.borderWidth = 1
+        textView.layer.cornerRadius = 5
+        textView.backgroundColor = .systemGray6
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
@@ -55,7 +58,7 @@ extension AddReviewViewController {
         view.backgroundColor = .white
         view.addSubview(titleLabel)
         view.addSubview(textView)
-        view.addSubview(footer)
+        view.addSubview(sendButton)
     }
 
     func setupConstraints() {
@@ -66,15 +69,16 @@ extension AddReviewViewController {
             textView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
             textView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40),
             textView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textView.heightAnchor.constraint(equalToConstant: 100),
+            textView.heightAnchor.constraint(equalToConstant: 200),
             
-            footer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            footer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            footer.widthAnchor.constraint(equalTo: view.widthAnchor)
+            sendButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            sendButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20)
         ])
     }
 
     func setupObservers() {
-        footer.footerButtonTapped.bind(to: viewModel.inputs.addReviewTapped).disposed(by: viewModel.disposeBag)
+        sendButton.rx.tap.map{ [weak self] in
+            self?.textView.text
+        }.compactMap{ $0 }.bind(to: viewModel.inputs.addReviewTapped).disposed(by: viewModel.disposeBag)
     }
 }

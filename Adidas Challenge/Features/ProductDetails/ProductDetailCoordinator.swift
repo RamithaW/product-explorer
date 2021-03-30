@@ -10,7 +10,7 @@ import RxSwift
 
 class ProductDetailCoordinator: BaseCoordinator<Void> {
     
-    var addReview = PublishSubject<Void>()
+    var addReview = PublishSubject<Product>()
     
     var dismissedView = PublishSubject<Void>()
     
@@ -27,8 +27,8 @@ class ProductDetailCoordinator: BaseCoordinator<Void> {
     override public func start() -> Observable<Void> {
         rootViewController?.pushViewController(viewController, animated: true)
         
-        addReview.subscribe(onNext: { [weak self] _ in
-            guard let self = self, let addReviewCoordinator = self.addReviewModuleBuilder.buildModule(with: self.viewController)?.coordinator as? AddReviewCoordinator else { return }
+        addReview.subscribe(onNext: { [weak self] product in
+            guard let self = self, let addReviewCoordinator = self.addReviewModuleBuilder.buildModule(with: self.viewController, context: product)?.coordinator as? AddReviewCoordinator else { return }
             
             Logger.info("Navigating to Add Review screen")
             self.coordinate(to: addReviewCoordinator).subscribe().disposed(by: self.disposeBag)

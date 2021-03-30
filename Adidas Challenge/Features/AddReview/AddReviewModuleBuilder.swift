@@ -9,7 +9,9 @@
 import UIKit
 
 
-protocol AddReviewModuleBuildable: ModuleBuildable {}
+protocol AddReviewModuleBuildable: ModuleBuildable {
+    func buildModule<T>(with rootViewController: UIViewController, context: Any?) -> Module<T>?
+}
 
 class AddReviewModuleBuilder: AddReviewModuleBuildable {
     
@@ -19,10 +21,12 @@ class AddReviewModuleBuilder: AddReviewModuleBuildable {
         self.container = container
     }
     
-    func buildModule<T>(with rootViewController: UIViewController) -> Module<T>? {
+    func buildModule<T>(with rootViewController: UIViewController, context: Any?) -> Module<T>? {
+        guard let product = context as? Product else { return nil }
+        
         registerService()
         registerUsecase()
-        registerViewModel()
+        registerViewModel(product: product)
         registerView()
         registerCoordinator(rootViewController: rootViewController)
         
@@ -53,11 +57,11 @@ private extension AddReviewModuleBuilder {
         }
     }
     
-    func registerViewModel() {
+    func registerViewModel(product: Product) {
         container.register(AddReviewViewModel.self) { [weak self] in
             guard let useCase = self?.container.resolve(AddReviewInteractable.self) else { return nil }
             
-            return AddReviewViewModel(useCase: useCase)
+            return AddReviewViewModel(useCase: useCase, product: product)
         }
     }
     

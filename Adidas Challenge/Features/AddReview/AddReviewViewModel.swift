@@ -15,10 +15,12 @@ protocol AddReviewViewModellable: class {
 }
 
 struct AddReviewViewModelInputs {
-    let addReviewTapped = PublishSubject<Void>()
+    let addReviewTapped = PublishSubject<String>()
 }
 
-struct AddReviewViewModelOutputs {}
+struct AddReviewViewModelOutputs {
+    let reviewAdded = PublishSubject<Void>()
+}
 
 class AddReviewViewModel: AddReviewViewModellable {
 
@@ -26,8 +28,10 @@ class AddReviewViewModel: AddReviewViewModellable {
     let inputs = AddReviewViewModelInputs()
     let outputs = AddReviewViewModelOutputs()
     var useCase: AddReviewInteractable
-
-    init(useCase: AddReviewInteractable) {
+    let product: Product
+    
+    init(useCase: AddReviewInteractable, product: Product) {
+        self.product = product
         self.useCase = useCase
         setupObservables()
     }
@@ -42,13 +46,14 @@ private extension AddReviewViewModel {
     }
     
     func observeReviewAdding() {
-        inputs.addReviewTapped.subscribe(onNext: { [weak self] _ in
+        inputs.addReviewTapped.subscribe(onNext: { [weak self] comment in
             guard let self = self else { return }
             
             Logger.info("Attempting to save review")
             
-            self.useCase.saveReview(Review(productId: "FI444", locale: "en-US", rating: 4, text: "Testing from code")).subscribe(onNext: { _ in
-                
+            // Currently hardcoding the rating, ideally I would implement stars so the user can tap to input
+            self.useCase.saveReview(Review(productId: self.product.id, locale: "en-US", rating: 4, text: comment)).subscribe(onNext: { review in
+                self.outputs.reviewAdded.onNext(())
             }).disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
     }

@@ -21,7 +21,7 @@ struct ProductDetailViewModelInputs {
 struct ProductDetailViewModelOutputs {
     let viewDismissed = PublishSubject<Void>()
     let showProductDetails = BehaviorSubject<Product?>(value: nil)
-    let footerButtonTapped = PublishSubject<Void>()
+    let footerButtonTapped = PublishSubject<Product>()
 }
 
 class ProductDetailViewModel: ProductDetailViewModellable {
@@ -30,8 +30,10 @@ class ProductDetailViewModel: ProductDetailViewModellable {
     let inputs = ProductDetailViewModelInputs()
     let outputs = ProductDetailViewModelOutputs()
     var useCase: ProductDetailInteractable
-
+    let product: Product
+    
     init(useCase: ProductDetailInteractable, product: Product) {
+        self.product = product
         self.useCase = useCase
         outputs.showProductDetails.onNext(product)
         setupObservables()
@@ -43,6 +45,8 @@ class ProductDetailViewModel: ProductDetailViewModellable {
 private extension ProductDetailViewModel {
 
     func setupObservables() {
-        inputs.footerButtonTapped.bind(to: outputs.footerButtonTapped).disposed(by: disposeBag)
+        inputs.footerButtonTapped.map{ [weak self] in
+            self?.product
+        }.compactMap{ $0 }.bind(to: outputs.footerButtonTapped).disposed(by: disposeBag)
     }
 }
