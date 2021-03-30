@@ -16,6 +16,7 @@ protocol ProductDetailViewModellable: class {
 
 struct ProductDetailViewModelInputs {
     let footerButtonTapped = PublishSubject<Void>()
+    let reloadProductDetails = PublishSubject<Void>()
 }
 
 struct ProductDetailViewModelOutputs {
@@ -48,5 +49,16 @@ private extension ProductDetailViewModel {
         inputs.footerButtonTapped.map{ [weak self] in
             self?.product
         }.compactMap{ $0 }.bind(to: outputs.footerButtonTapped).disposed(by: disposeBag)
+        
+        inputs.reloadProductDetails.subscribe { [weak self] _ in
+            guard let self = self else { return }
+            Logger.info("Attempting to fetch product details for: \(self.product.id)")
+            self.useCase.fetchProductDetails(self.product.id).subscribe(onNext: { (product) in
+                Logger.info("Fetched product details")
+                self.outputs.showProductDetails.onNext(product)
+            }, onError: { (error) in
+                Logger.error("Error fetching product details for \(self.product.id)")
+            }).disposed(by: self.disposeBag)
+        }.disposed(by: disposeBag)
     }
 }

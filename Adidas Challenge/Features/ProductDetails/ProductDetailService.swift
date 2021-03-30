@@ -9,7 +9,7 @@
 import RxSwift
 
 public protocol ProductDetailServiceFetching {
-    func fetchProductDetails() -> Observable<Product>
+    func fetchProductDetails(_ productId: String) -> Observable<Product>
 }
 
 class ProductDetailService: ProductDetailServiceFetching {
@@ -20,8 +20,8 @@ class ProductDetailService: ProductDetailServiceFetching {
         self.client = client
     }
     
-    func fetchProductDetails() -> Observable<Product> {
+    func fetchProductDetails(_ productId: String) -> Observable<Product> {
         Logger.debug("Preparing to fetch product details")
-        return client.request(ApiRouter.getProducts)
+        return client.request(ApiRouter.getProduct(productId))
     }
 }

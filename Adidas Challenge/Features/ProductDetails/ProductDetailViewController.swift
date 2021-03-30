@@ -171,6 +171,8 @@ extension ProductDetailViewController {
             self.productPriceLabel.text = "\(ApplicationConstants.currencySymbol)\(product.price)"
             self.productDescriptionLabel.text = product.description
             
+            self.stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            
             product.reviews.forEach { (review) in
                 self.stackView.addArrangedSubview(ReviewView(withReview: review))
             }

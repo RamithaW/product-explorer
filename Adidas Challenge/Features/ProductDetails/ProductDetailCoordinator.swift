@@ -11,8 +11,8 @@ import RxSwift
 class ProductDetailCoordinator: BaseCoordinator<Void> {
     
     var addReview = PublishSubject<Product>()
-    
     var dismissedView = PublishSubject<Void>()
+    var reloadProductDetails = PublishSubject<Void>()
     
     private weak var rootViewController: UINavigationController?
     private let viewController: UIViewController
@@ -31,7 +31,9 @@ class ProductDetailCoordinator: BaseCoordinator<Void> {
             guard let self = self, let addReviewCoordinator = self.addReviewModuleBuilder.buildModule(with: self.viewController, context: product)?.coordinator as? AddReviewCoordinator else { return }
             
             Logger.info("Navigating to Add Review screen")
-            self.coordinate(to: addReviewCoordinator).subscribe().disposed(by: self.disposeBag)
+            self.coordinate(to: addReviewCoordinator).subscribe{ [weak self] _ in
+                self?.reloadProductDetails.onNext(())
+            }.disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
         return dismissedView
     }

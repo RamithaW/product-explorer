@@ -14,6 +14,7 @@ enum ApiRouter: URLRequestConvertible {
     
     //The endpoint name we'll call later
     case getProducts
+    case getProduct(_ productId: String)
     case saveReview(review: Review)
     
     //MARK: - URLRequestConvertible
@@ -50,7 +51,7 @@ enum ApiRouter: URLRequestConvertible {
     //This returns the HttpMethod type. It's used to determine the type if several endpoints are peresent
     private var method: HTTPMethod {
         switch self {
-        case .getProducts:
+        case .getProducts, .getProduct:
             return .get
         case .saveReview:
             return .post
@@ -63,6 +64,8 @@ enum ApiRouter: URLRequestConvertible {
         switch self {
         case .getProducts:
             return "\(ApplicationConstants.baseUrl):3001/product"
+        case let .getProduct(productId):
+            return "\(ApplicationConstants.baseUrl):3001/product/\(productId)"
         case let .saveReview(review):
             return "\(ApplicationConstants.baseUrl):3002/reviews/\(review.productId)/"
         }
@@ -72,7 +75,7 @@ enum ApiRouter: URLRequestConvertible {
     //This is the queries part, it's optional because an endpoint can be without parameters
     private var parameters: Parameters? {
         switch self {
-        case .getProducts:
+        case .getProducts, .getProduct:
             //A dictionary of the key (From the constants file) and its value is returned
             return [:]
         case let .saveReview(review):

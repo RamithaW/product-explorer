@@ -83,6 +83,7 @@ private extension ProductDetailModuleBuilder {
             let coordinator = ProductDetailCoordinator(rootViewController: rootViewController, viewController: viewController, addReviewModuleBuilder: addReviewModuleBuilder)
             coordinator.dismissedView = viewController.viewModel.outputs.viewDismissed
             coordinator.addReview = viewController.viewModel.outputs.footerButtonTapped
+            coordinator.reloadProductDetails.bind(to: viewController.viewModel.inputs.reloadProductDetails).disposed(by: viewController.viewModel.disposeBag)
             return coordinator
         }
     }

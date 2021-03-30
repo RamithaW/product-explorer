@@ -9,7 +9,7 @@
 import RxSwift
 
 public protocol ProductDetailInteractable {
-    func fetchProductDetails() -> Observable<Product>
+    func fetchProductDetails(_ productId: String) -> Observable<Product>
 }
 
 class ProductDetailUseCase: ProductDetailInteractable {
@@ -20,7 +20,7 @@ class ProductDetailUseCase: ProductDetailInteractable {
         self.service = service
     }
     
-    func fetchProductDetails() -> Observable<Product> {
-        service.fetchProductDetails()
+    func fetchProductDetails(_ productId: String) -> Observable<Product> {
+        service.fetchProductDetails(productId)
     }
 }
