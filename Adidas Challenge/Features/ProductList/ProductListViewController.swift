@@ -30,6 +30,7 @@ class ProductListViewController: UIViewController, ViewType {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
         tableView.keyboardDismissMode = .onDrag
+        tableView.separatorStyle = .none
         return tableView
     }()
     

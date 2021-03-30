@@ -42,6 +42,18 @@ class ProductCell: UITableViewCell {
         return label
     }()
     
+    lazy var containterView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 5
+        view.layer.shadowColor = UIColor.gray.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 4
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -74,22 +86,26 @@ class ProductCell: UITableViewCell {
 private extension ProductCell {
     
     func setupUI() {
-        
-        addSubview(productImageView)
-        addSubview(productNameLabel)
-        addSubview(productDescriptionLabel)
-        addSubview(productPriceLabel)
-        
+        addSubview(containterView)
+        containterView.addSubview(productImageView)
+        containterView.addSubview(productNameLabel)
+        containterView.addSubview(productDescriptionLabel)
+        containterView.addSubview(productPriceLabel)
         productImageView.backgroundColor = .white
     }
     
     func setupConstraints() {
-        let imagBottomConstraint = productImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+        let imagBottomConstraint = productImageView.bottomAnchor.constraint(equalTo: containterView.bottomAnchor, constant: -10)
         imagBottomConstraint.priority = .defaultHigh
         
         NSLayoutConstraint.activate([
-            productImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-            productImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            containterView.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
+            containterView.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
+            containterView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            containterView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            
+            productImageView.leftAnchor.constraint(equalTo: containterView.leftAnchor, constant: 10),
+            productImageView.topAnchor.constraint(equalTo: containterView.topAnchor, constant: 10),
             productImageView.heightAnchor.constraint(equalToConstant: 100),
             productImageView.widthAnchor.constraint(equalToConstant: 100),
             imagBottomConstraint,

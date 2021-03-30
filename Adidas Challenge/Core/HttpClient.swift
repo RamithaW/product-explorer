@@ -35,7 +35,7 @@ public class HttpClient: HTTPClientType {
                     observer.onNext(value)
                     observer.onCompleted()
                 case .failure(let error):
-                    Logger.error("Error response for \(urlConvertible.urlRequest?.url?.absoluteString)")
+                    Logger.error("Error response for \(urlConvertible.urlRequest?.url?.absoluteString ?? "")")
                     //Something went wrong, switch on the status code and return the error
                     switch response.response?.statusCode {
                     case 404:
