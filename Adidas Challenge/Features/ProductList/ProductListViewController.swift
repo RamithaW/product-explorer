@@ -29,7 +29,7 @@ class ProductListViewController: UIViewController, ViewType {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
-        
+        tableView.keyboardDismissMode = .onDrag
         return tableView
     }()
     
