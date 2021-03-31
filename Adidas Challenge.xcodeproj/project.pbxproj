@@ -171,11 +171,10 @@
 		1A085B49260E815D00DC9F03 /* Adidas Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				1A95A49B26147CDA00E090CD /* Application */,
 				1A95A4752611F60D00E090CD /* Features */,
 				1A085B7A260F0BAE00DC9F03 /* Core */,
 				1A085B74260EA0C400DC9F03 /* Utils */,
-				1A085B70260E9C1500DC9F03 /* Coordinator */,
-				1A085B6F260E9BDB00DC9F03 /* Delegates */,
 				1A085B53260E815E00DC9F03 /* Assets.xcassets */,
 				1A085B55260E815E00DC9F03 /* LaunchScreen.storyboard */,
 				1A95A4762611F70D00E090CD /* Main.storyboard */,
@@ -215,13 +214,10 @@
 		1A085B73260EA01800DC9F03 /* ProductList */ = {
 			isa = PBXGroup;
 			children = (
-				1A085B982610666000DC9F03 /* View */,
-				1A085B78260F0B8A00DC9F03 /* ProductListModuleBuilder.swift */,
-				1A085B7D260F6DF600DC9F03 /* ProductListCoordinator.swift */,
-				1A085B82260F707100DC9F03 /* ProductListViewModel.swift */,
-				1A085B84260F717E00DC9F03 /* ProductListService.swift */,
-				1A085B86260F721800DC9F03 /* ProductListUseCase.swift */,
-				1A085B88260F727E00DC9F03 /* ProductListViewController.swift */,
+				1A95A4A326147F7200E090CD /* Service */,
+				1A95A4A226147F7000E090CD /* Builder */,
+				1A95A4A126147F6700E090CD /* Presentation */,
+				1A95A4A026147F6300E090CD /* Domain */,
 			);
 			path = ProductList;
 			sourceTree = "<group>";
@@ -269,14 +265,10 @@
 		1A95A452261190B800E090CD /* ProductDetails */ = {
 			isa = PBXGroup;
 			children = (
-				1A95A4702611E4BD00E090CD /* Views */,
-				1A95A46D2611DE0600E090CD /* Footer */,
-				1A95A465261191D000E090CD /* ProductDetailCoordinator.swift */,
-				1A95A462261191D000E090CD /* ProductDetailModuleBuilder.swift */,
-				1A95A466261191D000E090CD /* ProductDetailService.swift */,
-				1A95A461261191D000E090CD /* ProductDetailUseCase.swift */,
-				1A95A463261191D000E090CD /* ProductDetailViewController.swift */,
-				1A95A464261191D000E090CD /* ProductDetailViewModel.swift */,
+				1A95A4A726147FC500E090CD /* Service */,
+				1A95A4A626147FBD00E090CD /* Domain */,
+				1A95A4A526147FB900E090CD /* Builder */,
+				1A95A4A426147FB300E090CD /* Presentation */,
 			);
 			path = ProductDetails;
 			sourceTree = "<group>";
@@ -292,6 +284,7 @@
 		1A95A4702611E4BD00E090CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1A95A46D2611DE0600E090CD /* Footer */,
 				1A95A4712611E4CC00E090CD /* ReviewView.swift */,
 			);
 			path = Views;
@@ -311,14 +304,125 @@
 		1A95A47D261245C300E090CD /* AddReview */ = {
 			isa = PBXGroup;
 			children = (
-				1A95A48C2612463300E090CD /* AddReviewCoordinator.swift */,
-				1A95A48E2612463300E090CD /* AddReviewModuleBuilder.swift */,
-				1A95A48D2612463300E090CD /* AddReviewService.swift */,
+				1A95A49F26147E8500E090CD /* Service */,
+				1A95A49E26147E7200E090CD /* Builder */,
+				1A95A49D26147E5E00E090CD /* Presentation */,
+				1A95A49C26147E5500E090CD /* Domain */,
+			);
+			path = AddReview;
+			sourceTree = "<group>";
+		};
+		1A95A49B26147CDA00E090CD /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				1A085B70260E9C1500DC9F03 /* Coordinator */,
+				1A085B6F260E9BDB00DC9F03 /* Delegates */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		1A95A49C26147E5500E090CD /* Domain */ = {
+			isa = PBXGroup;
+			children = (
 				1A95A48B2612463300E090CD /* AddReviewUseCase.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		1A95A49D26147E5E00E090CD /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				1A95A48C2612463300E090CD /* AddReviewCoordinator.swift */,
 				1A95A4902612463400E090CD /* AddReviewViewController.swift */,
 				1A95A48F2612463300E090CD /* AddReviewViewModel.swift */,
 			);
-			path = AddReview;
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		1A95A49E26147E7200E090CD /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				1A95A48E2612463300E090CD /* AddReviewModuleBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		1A95A49F26147E8500E090CD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1A95A48D2612463300E090CD /* AddReviewService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		1A95A4A026147F6300E090CD /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				1A085B86260F721800DC9F03 /* ProductListUseCase.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		1A95A4A126147F6700E090CD /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				1A085B982610666000DC9F03 /* View */,
+				1A085B7D260F6DF600DC9F03 /* ProductListCoordinator.swift */,
+				1A085B82260F707100DC9F03 /* ProductListViewModel.swift */,
+				1A085B88260F727E00DC9F03 /* ProductListViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		1A95A4A226147F7000E090CD /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				1A085B78260F0B8A00DC9F03 /* ProductListModuleBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		1A95A4A326147F7200E090CD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1A085B84260F717E00DC9F03 /* ProductListService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		1A95A4A426147FB300E090CD /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				1A95A4702611E4BD00E090CD /* Views */,
+				1A95A465261191D000E090CD /* ProductDetailCoordinator.swift */,
+				1A95A463261191D000E090CD /* ProductDetailViewController.swift */,
+				1A95A464261191D000E090CD /* ProductDetailViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		1A95A4A526147FB900E090CD /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				1A95A462261191D000E090CD /* ProductDetailModuleBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		1A95A4A626147FBD00E090CD /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				1A95A461261191D000E090CD /* ProductDetailUseCase.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		1A95A4A726147FC500E090CD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1A95A466261191D000E090CD /* ProductDetailService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		1AE7A254261379BF00E16AD1 /* Features */ = {
