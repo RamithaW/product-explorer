@@ -30,25 +30,36 @@ Clean architecture is something I like to follow and hence, decided to implement
 High level directory Structure:
 
     .
-    ├── Application   # High level application related files like BaseCoordinator and AppDelegates
-    ├── Features      # The main feature modules
-    ├── Core          # Core components that can be used across the application
-    └── Utils		  # Helper or utility features to make dev life a bit more easy
+    ├── Application     # High level application related files like BaseCoordinator and AppDelegates
+    ├── Features        # The main feature modules
+    ├── Core            # Core components that can be used across the application
+    └── Utils		    # Helper or utility features to make dev life a bit more easy
 
 Each feature module would have:
 
     .
-    ├── Domain			# Domain related logic consisting of UseCases that can be used by the presentation layer
-    ├── Service			# External API calls and related logic would reside here
-    ├── Builder			# Contains a builder that injects dependencies and instantiaties a module
-    └── Presentation	# Presentation logic goes here
-
-The responsibility of a few components:
+    ├── Domain			    # Domain related logic consisting of UseCases that can be used by the presentation layer
+    ├── Service			    # External API calls and related logic would reside here
+    ├── Builder			    # Contains a builder that injects dependencies and instantiaties a module
+    └── Presentation    	# Presentation logic goes here
 
 
 ## Improvements & Notes
+#### App Resilience
+In terms of handling the internet connection, the implementation contains a screen that is displayed when there is a network error (or any other error for the moment) where the user is informed and has the capability to reload the screen. This can be further improved to give more details of the error that took place, such as the lack of internt connectivity or error server error. 
+
+#### App Stability & errors tracking
+For the current implementation I have only logged the errors that take place. As a next step we can integrate a tool like `Firebase` or `Crashlitics` to view the crashes remotely and also identify stats like the frequency and the number of users affected. Due to time constraints I have not implemented this in the project for now.
+
+#### Testing
+The architecture keeps in mind the testability and takes an interface-over-implementatin approach where classes can easily be mocked to ease the writing of unit tests. I have included tests for one feature due to time constrainst, since increasing the coverage is a repetitive task. `RxTest` was used to test the reactive aspect of the application.
+
 
 ## CI/CD
+Due to time constraints I have not included any CI/CD related work, however, if this were to be incorporated, most Source control platforms support the automation of building, testing and deploying the application via runners. I do not have extensive experience with this but I can definitely take some time to read some docs and set up this infrastructure. Fastlane can also be used to automate processes like uploading of DSYM files and app store submissions in case the source control runners' features are limited or unavailable.
 
 ## UI/UX
+I can think of a few improvements to the overall user experience namely:
 
+- Use stars for showing/capturing rating details of a product. At the moment I have hardcoded the rating value to 4 when adding a review, but if given a little bit more time, we could add interactive stars that the user can tap to reflect the rating.
+- Colours and aesthetics: I have stuck to os specific fonts and colours, but it would be neat to have a design system with custom colours and controls like buttons, but again since would cost some additional time, I'vde decided to omit it from implementation.
