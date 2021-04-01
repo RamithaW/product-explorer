@@ -30,9 +30,9 @@ Clean architecture is something I like to follow and hence, decided to implement
 High level directory Structure:
 
     .
-    ├── Application      # High level application related files like BaseCoordinator and AppDelegates
-    ├── Features         # The main feature modules
-    ├── Core             # Core components that can be used across the application
+    ├── Application     # High level application related files like BaseCoordinator and AppDelegates
+    ├── Features        # The main feature modules
+    ├── Core            # Core components that can be used across the application
     └── Utils		    # Helper or utility features to make dev life a bit more easy
 
 Each feature module would have:
@@ -41,7 +41,7 @@ Each feature module would have:
     ├── Domain			    # Domain related logic consisting of UseCases that can be used by the presentation layer
     ├── Service			    # External API calls and related logic would reside here
     ├── Builder			    # Contains a builder that injects dependencies and instantiaties a module
-    └── Presentation    		# Presentation logic goes here
+    └── Presentation    	# Presentation logic goes here
 
 
 ## Improvements & Notes
