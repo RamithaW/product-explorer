@@ -76,4 +76,3 @@ I can think of a few improvements to the overall user experience namely:
 - Use stars for showing/capturing rating details of a product. At the moment I have hardcoded the rating value to 4 when adding a review, but if given a little bit more time, we could add interactive stars that the user can tap to reflect the rating.
 - Colours and aesthetics: I have stuck to os specific fonts and colours, but it would be neat to have a design system with custom colours and controls like buttons, but again since would cost some additional time, I'vde decided to omit it from implementation.
 - The look and feel of the `Add review` screen acn be greatly improved
-- 
