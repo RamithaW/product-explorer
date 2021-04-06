@@ -13,7 +13,7 @@
 - Clone or download the project from the github repository
 - Move to the project directory and install the dependencies
     ```sh
-    cd Adidas\ Challenge/
+    cd product-explorer
     pod install
     ```
 - Once the pods have been installed open the `Adidas Challenge.xcworkspace` in Xcode
