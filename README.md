@@ -1,4 +1,4 @@
-# Adidas coding challenge
+# Product explorer
 
 ## Screencast
 
