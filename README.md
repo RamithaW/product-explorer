@@ -55,7 +55,6 @@ Each feature module would have:
 #### Functionality
 
 - Search: Although the requirement was to search for product price, description & title, I have also included the ability to search by Id since, all the price, description & title was the same for all products in the database
-- 
 
 #### App Resilience
 In terms of handling the internet connection, the implementation contains a screen that is displayed when there is a network error (or any other error for the moment) where the user is informed and has the capability to reload the screen. This can be further improved to give more details of the error that took place, such as the lack of internt connectivity or error server error. 
@@ -75,4 +74,4 @@ I can think of a few improvements to the overall user experience namely:
 
 - Use stars for showing/capturing rating details of a product. At the moment I have hardcoded the rating value to 4 when adding a review, but if given a little bit more time, we could add interactive stars that the user can tap to reflect the rating.
 - Colours and aesthetics: I have stuck to os specific fonts and colours, but it would be neat to have a design system with custom colours and controls like buttons, but again since would cost some additional time, I'vde decided to omit it from implementation.
-- The look and feel of the `Add review` screen acn be greatly improved
+- The look and feel of the `Add review` screen can be greatly improved
